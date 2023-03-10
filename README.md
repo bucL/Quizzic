@@ -3,7 +3,6 @@
 
 
 ## Current Project Status
----
 - [x] Project Initialised
 - [ ] Sign Up Page UI
 - [ ] Sign Up Page Functionality
