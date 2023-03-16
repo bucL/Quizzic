@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>239127937019-m3p7e6ioblnmjk2vc4a6fm3lesue0ngb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.239127937019-m3p7e6ioblnmjk2vc4a6fm3lesue0ngb</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCOFbiYnq49qYBFZGUOe7jIwqLLB_Hd83Q</string>
+	<key>GCM_SENDER_ID</key>
+	<string>239127937019</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>AadityaShankar.Quizzic</string>
+	<key>PROJECT_ID</key>
+	<string>quizzic-73e18</string>
+	<key>STORAGE_BUCKET</key>
+	<string>quizzic-73e18.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:239127937019:ios:e160a292ac059cecbe555e</string>
+	<key>DATABASE_URL</key>
+	<string>https://quizzic-73e18-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>
