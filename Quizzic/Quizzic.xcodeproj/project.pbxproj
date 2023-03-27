@@ -18,8 +18,12 @@
 		68A331DC29C3C8F400457300 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 68A331DB29C3C8F400457300 /* FirebaseFirestoreSwift */; };
 		68A331DE29C3C8F400457300 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 68A331DD29C3C8F400457300 /* FirebaseStorage */; };
 		68A331E029C3C8F400457300 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 68A331DF29C3C8F400457300 /* FirebaseStorageCombine-Community */; };
+		68ADAE8529D11FE10004CB84 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADAE8429D11FE10004CB84 /* User.swift */; };
+		68ADAE8729D120230004CB84 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADAE8629D120230004CB84 /* ContentView.swift */; };
+		68ADAE8929D121C20004CB84 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADAE8829D121C20004CB84 /* ProfileView.swift */; };
+		68ADAE8B29D121D30004CB84 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADAE8A29D121D30004CB84 /* AuthenticationView.swift */; };
+		68ADAE8F29D122130004CB84 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADAE8E29D122130004CB84 /* UserViewModel.swift */; };
 		68D255CF29BBDE13003A306A /* QuizzicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D255CE29BBDE13003A306A /* QuizzicApp.swift */; };
-		68D255D129BBDE13003A306A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D255D029BBDE13003A306A /* ContentView.swift */; };
 		68D255D329BBDE14003A306A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68D255D229BBDE14003A306A /* Assets.xcassets */; };
 		68D255D629BBDE14003A306A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68D255D529BBDE14003A306A /* Preview Assets.xcassets */; };
 		68D255E029BBDE14003A306A /* QuizzicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D255DF29BBDE14003A306A /* QuizzicTests.swift */; };
@@ -46,9 +50,13 @@
 
 /* Begin PBXFileReference section */
 		68A331CA29C3C83B00457300 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		68ADAE8429D11FE10004CB84 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		68ADAE8629D120230004CB84 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		68ADAE8829D121C20004CB84 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		68ADAE8A29D121D30004CB84 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		68ADAE8E29D122130004CB84 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		68D255CB29BBDE13003A306A /* Quizzic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quizzic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68D255CE29BBDE13003A306A /* QuizzicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzicApp.swift; sourceTree = "<group>"; };
-		68D255D029BBDE13003A306A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		68D255D229BBDE14003A306A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68D255D529BBDE14003A306A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		68D255DB29BBDE14003A306A /* QuizzicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuizzicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +101,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68ADAE8129D11FB30004CB84 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				68ADAE8E29D122130004CB84 /* UserViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		68ADAE8229D11FCB0004CB84 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				68D255CE29BBDE13003A306A /* QuizzicApp.swift */,
+				68ADAE8629D120230004CB84 /* ContentView.swift */,
+				68ADAE8829D121C20004CB84 /* ProfileView.swift */,
+				68ADAE8A29D121D30004CB84 /* AuthenticationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		68ADAE8329D11FCE0004CB84 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				68ADAE8429D11FE10004CB84 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		68D255C229BBDE13003A306A = {
 			isa = PBXGroup;
 			children = (
@@ -116,9 +151,10 @@
 		68D255CD29BBDE13003A306A /* Quizzic */ = {
 			isa = PBXGroup;
 			children = (
+				68ADAE8329D11FCE0004CB84 /* Model */,
+				68ADAE8229D11FCB0004CB84 /* View */,
+				68ADAE8129D11FB30004CB84 /* ViewModel */,
 				68A331CA29C3C83B00457300 /* GoogleService-Info.plist */,
-				68D255CE29BBDE13003A306A /* QuizzicApp.swift */,
-				68D255D029BBDE13003A306A /* ContentView.swift */,
 				68D255D229BBDE14003A306A /* Assets.xcassets */,
 				68D255D429BBDE14003A306A /* Preview Content */,
 			);
@@ -296,8 +332,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68D255D129BBDE13003A306A /* ContentView.swift in Sources */,
+				68ADAE8929D121C20004CB84 /* ProfileView.swift in Sources */,
+				68ADAE8F29D122130004CB84 /* UserViewModel.swift in Sources */,
 				68D255CF29BBDE13003A306A /* QuizzicApp.swift in Sources */,
+				68ADAE8729D120230004CB84 /* ContentView.swift in Sources */,
+				68ADAE8529D11FE10004CB84 /* User.swift in Sources */,
+				68ADAE8B29D121D30004CB84 /* AuthenticationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
