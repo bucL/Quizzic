@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct ContentView: View {
     
@@ -16,8 +17,22 @@ struct ContentView: View {
             
             AuthView()
         } else {
-            Text("Logged In. User id is \(userID)")
-            //Homescreen()
+            VStack {
+                Text("Logged In. User id is \(userID)")
+                
+                Button {
+                    let firebaseAuth = Auth.auth()
+                    do {
+                        try firebaseAuth.signOut()
+                        userID = ""
+                    } catch let signOutError as NSError {
+                        print("Error signing out: %@", signOutError)
+                    }
+                } label: {                    Text("Sign Out")
+                }
+                //Homescreen()
+            }
+            
         }
         
     }

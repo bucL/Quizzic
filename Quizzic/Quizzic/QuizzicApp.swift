@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 import FirebaseCore
-
+import FirebaseFirestore
 
 
 
@@ -18,6 +18,7 @@ struct YourApp: App {
     
     init() {
         FirebaseApp.configure()     //Firebase initialised
+        
     }
     
     var body: some Scene {

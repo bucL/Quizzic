@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseFirestore
 
 struct LogInView: View {
     @Binding var currentView: String 
@@ -113,8 +114,21 @@ struct LogInView: View {
                         }
                         if let authResult = authResult {
                             userID = authResult.user.uid
+                            print(authResult.user)
+                            let db = Firestore.firestore()
+                            
+                            db.collection("users").document("\(userID)").setData([
+                                "email": "\(email)"
+                            ]) { err in
+                                if let err = err {
+                                    print("Error writing document: \(err)")
+                                } else {
+                                    print("Document successfully written!")
+                                }
+                            }
                         }
                     }
+                    
                     
                     
                 } label: {
