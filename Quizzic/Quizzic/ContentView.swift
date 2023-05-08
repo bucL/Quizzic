@@ -2,23 +2,24 @@
 //  ContentView.swift
 //  Quizzic
 //
-//  Created by Aaditya Shankar on 11/3/2023.
+//  Created by Aaditya Shankar on 8/5/2023.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    
+    @AppStorage("uid") var userID: String  = ""
+    
     var body: some View {
-        ZStack{
+        if userID == "" {
             
-            VStack {
-                Text("Welcome to Quizzic!")
-                
-                
-            }
-            .padding()
-
+            AuthView()
+        } else {
+            Text("Logged In. User id is \(userID)")
+            //Homescreen()
         }
+        
     }
 }
 

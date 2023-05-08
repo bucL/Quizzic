@@ -6,10 +6,24 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct LogInView: View {
+    @Binding var currentView: String 
+    @AppStorage("uid") var userID: String  = ""
+    
+    
+    
     @State private var email: String = ""
     @State private var password: String = ""
+    
+    private func isValidPassword(_ password: String) -> Bool {
+        // checks if the password matches the specifications
+        // min 6 char, at least 1 uppercase and 1 special char
+        let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
+        return passwordRegex.evaluate(with: password)
+    }
+    
     var body: some View {
         ZStack {
             Color.white.edgesIgnoringSafeArea(.all)
@@ -33,9 +47,14 @@ struct LogInView: View {
                     
                     Spacer()
                     
-                    Image(systemName: "checkmark")
-                        .fontWeight(.bold)
-                        .foregroundColor(.green)
+                    if email.count != 0 {
+                        Image(systemName: email.isValidEmail() ? "checkmark" : "xmark")
+                            .fontWeight(.bold)
+                            .foregroundColor(email.isValidEmail() ? .green : .red)
+
+                    }
+                    
+                    
                     
                 }
                 .padding()
@@ -49,13 +68,17 @@ struct LogInView: View {
                 
                 HStack {
                     Image(systemName: "lock")
-                    TextField("Password", text:$password)
+                    SecureField("Password", text:$password)
                     
                     Spacer()
                     
-                    Image(systemName: "checkmark")
-                        .fontWeight(.bold)
-                        .foregroundColor(.green)
+                    if password.count != 0 {
+                    
+                        Image(systemName: isValidPassword(password) ? "checkmark" : "xmark")
+                            .fontWeight(.bold)
+                            .foregroundColor(isValidPassword(password) ?  .green : .red)
+                       
+                    }
                     
                 }
                 .padding()
@@ -67,7 +90,13 @@ struct LogInView: View {
                 
                 .padding()
                 
-                Button(action: {}) {
+                Button(action: {
+                    
+                    withAnimation() {
+                        self.currentView = "signup"
+                    }
+                    
+                }) {
                     Text("Don't have an account?")
                         .foregroundColor(.black.opacity(0.7))
                 }
@@ -76,6 +105,17 @@ struct LogInView: View {
                 Spacer()
                 
                 Button {
+                    
+                    Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                        if let error = error {
+                            print(error)
+                            return
+                        }
+                        if let authResult = authResult {
+                            userID = authResult.user.uid
+                        }
+                    }
+                    
                     
                 } label: {
                     Text("Sign In")
@@ -98,8 +138,3 @@ struct LogInView: View {
     }
 }
 
-struct LogInView_Previews: PreviewProvider {
-    static var previews: some View {
-        LogInView()
-    }
-}
