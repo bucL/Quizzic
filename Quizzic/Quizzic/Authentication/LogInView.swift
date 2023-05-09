@@ -115,6 +115,8 @@ struct LogInView: View {
                         if let authResult = authResult {
                             userID = authResult.user.uid
                             print(authResult.user)
+                            
+                            // I don't know what happens but whenever you remove this piece of code the entire program dies.
                             let db = Firestore.firestore()
                             
                             db.collection("users").document("\(userID)").setData([

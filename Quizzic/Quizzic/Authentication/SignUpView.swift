@@ -6,13 +6,18 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import Firebase
 import FirebaseAuth
+import FirebaseFirestore
 
 struct SignUpView: View {
     @Binding var currentView: String
     @AppStorage("uid") var userID: String  = ""
+    @AppStorage("username") var username: String = ""
     @State private var email: String = ""
     @State private var password: String = ""
+    @State private var newusername: String = ""
     
     private func isValidPassword(_ password: String) -> Bool {
         // checks if the password matches the specifications
@@ -91,6 +96,23 @@ struct SignUpView: View {
                 
                 .padding()
                 
+                HStack {
+                    Image(systemName: "person")
+                    TextField("Username", text:$newusername)
+                    
+                    Spacer()
+                    
+                }
+                .foregroundColor(.white)
+                .padding()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(lineWidth: 2)
+                        .foregroundColor(.white)
+                )
+                
+                .padding()
+                
                 Button(action: {
                     
                     withAnimation() {
@@ -114,7 +136,21 @@ struct SignUpView: View {
                         if let authResult = authResult {
                             print(authResult.user.uid)
                             userID = authResult.user.uid
+                            let db = Firestore.firestore()
                             
+                            db.collection("users").document("\(userID)").setData([
+                                "email": "\(email)",
+                                "username": "\(newusername)"
+                            ]) { err in
+                                if let err = err {
+                                    print("Error writing document: \(err)")
+                                } else {
+                                    print("Document successfully written!")
+                                }
+                            }
+                            
+                            
+                            username = newusername
                         }
                     }
                     

@@ -6,10 +6,17 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import FirebaseFirestore
+
 
 struct Homescreen: View {
+    
+    @AppStorage("uid") var userID: String  = ""
+    @AppStorage("username") var username: String = ""
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("\(username)")
     }
 }
 
