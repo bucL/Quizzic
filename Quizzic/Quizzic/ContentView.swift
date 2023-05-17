@@ -18,27 +18,28 @@ struct ContentView: View {
             
             AuthView()
         } else {
-            VStack {
-                Text("Logged In. User id is \(userID). Username is \(username)")
-                
-                Button {
-                    let firebaseAuth = Auth.auth()
-                    do {
-                        try firebaseAuth.signOut()
-                        userID = ""
-                        username = ""
-                    } catch let signOutError as NSError {
-                        print("Error signing out: %@", signOutError)
-                    }
-                } label: {                    Text("Sign Out")
-                }
-                //Homescreen()
+//            VStack {
+//                Text("Logged In. User id is \(userID). Username is \(username)")
+//
+//                Button {
+//                    let firebaseAuth = Auth.auth()
+//                    do {
+//                        try firebaseAuth.signOut()
+//                        userID = ""
+//                        username = ""
+//                    } catch let signOutError as NSError {
+//                        print("Error signing out: %@", signOutError)
+//                    }
+//                } label: {
+//                    Text("Sign Out")
+//                }
+                Homescreen()
             }
             
         }
         
     }
-}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

@@ -10,9 +10,9 @@ import FirebaseAuth
 import FirebaseFirestore
 
 struct LogInView: View {
-    @Binding var currentView: String 
+    @Binding var currentView: String
     @AppStorage("uid") var userID: String  = ""
-    
+    @AppStorage("username") var username: String = ""
     
     
     @State private var email: String = ""
@@ -52,7 +52,7 @@ struct LogInView: View {
                         Image(systemName: email.isValidEmail() ? "checkmark" : "xmark")
                             .fontWeight(.bold)
                             .foregroundColor(email.isValidEmail() ? .green : .red)
-
+                        
                     }
                     
                     
@@ -74,11 +74,11 @@ struct LogInView: View {
                     Spacer()
                     
                     if password.count != 0 {
-                    
+                        
                         Image(systemName: isValidPassword(password) ? "checkmark" : "xmark")
                             .fontWeight(.bold)
                             .foregroundColor(isValidPassword(password) ?  .green : .red)
-                       
+                        
                     }
                     
                 }
@@ -105,8 +105,8 @@ struct LogInView: View {
                 Spacer()
                 Spacer()
                 
+                
                 Button {
-                    
                     Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                         if let error = error {
                             print(error)
@@ -115,24 +115,25 @@ struct LogInView: View {
                         if let authResult = authResult {
                             userID = authResult.user.uid
                             print(authResult.user)
-                            
-                            // I don't know what happens but whenever you remove this piece of code the entire program dies.
                             let db = Firestore.firestore()
-                            
-                            db.collection("users").document("\(userID)").setData([
-                                "email": "\(email)"
-                            ]) { err in
-                                if let err = err {
-                                    print("Error writing document: \(err)")
-                                } else {
-                                    print("Document successfully written!")
-                                }
+                            let docRef = db.collection("users").document("\(userID)")
+                            docRef.getDocument { (document, error) in
+                                if let document = document, document.exists {
+                                        let dataDescription = document.data().map(String.init(describing: )) ?? "nil"
+                                        print("Document data: \(dataDescription)")
+                                    let data = document.data()
+                                    self.username = data!["username"] as? String ?? ""
+                                    print(username)
+                                    
+                                    } else {
+                                        print("Document does not exist")
+                                    }
                             }
+                            
+                            
+                            
                         }
                     }
-                    
-                    
-                    
                 } label: {
                     Text("Sign In")
                         .foregroundColor(.white)
@@ -147,6 +148,7 @@ struct LogInView: View {
                         )
                         .padding(.horizontal)
                 }
+                
                 
                 
             }
