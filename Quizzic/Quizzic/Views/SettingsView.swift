@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-
+import Firebase
+import FirebaseAuth
 
 struct SettingsView: View {
     @AppStorage("currentView") var view: String = "home"
@@ -17,8 +18,23 @@ struct SettingsView: View {
         Button {
             view = "home"
         } label: {
-            Text("Epic transition to home")
+            Text("Epic transition to home. username = \(username)")
         }
+        
+        Spacer()
+        
+        Button {
+            let firebaseAuth = Auth.auth()
+            do {
+              try firebaseAuth.signOut()
+                userID = ""
+            } catch let signOutError as NSError {
+              print("Error signing out: %@", signOutError)
+            }
+        } label: {
+            Text("log out")
+        }
+        
     }
 }
 

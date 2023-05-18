@@ -16,6 +16,20 @@ struct Homescreen: View {
     @AppStorage("username") var username: String = ""
     
     var body: some View {
+
+//        TabView {
+//            Homescreen()
+//                .tabItem {
+//                    Label("Home", systemImage: "house.fill")
+//                }
+//            SettingsView()
+//                .tabItem {
+//                    Label("Settings", systemImage: "gearshape.fill")
+//                }
+//        }
+        
+        
+        
         if view == "home" {
             HomepageView()
 
@@ -28,12 +42,14 @@ struct Homescreen: View {
 //            }
         } else if view == "settings" {
             SettingsView()
-            
+
 //            Button {
 //                view =  "home"
 //            } label: {
 //                Text("Click Me. Current view \(view). \(username)")
 //            }
+        } else if view == "quizcreate" {
+
         }
         
     }
@@ -42,5 +58,6 @@ struct Homescreen: View {
 struct Homescreen_Previews: PreviewProvider {
     static var previews: some View {
         Homescreen()
+            
     }
 }
