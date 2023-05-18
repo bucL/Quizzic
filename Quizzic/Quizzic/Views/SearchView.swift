@@ -1,13 +1,13 @@
 //
-//  HomepageView.swift
+//  SearchView.swift
 //  Quizzic
 //
-//  Created by Aaditya Shankar on 11/5/2023.
+//  Created by Aaditya Shankar on 19/5/2023.
 //
 
 import SwiftUI
 
-struct HomepageView: View {
+struct SearchView: View {
     @AppStorage("currentView") var view: String = "home"
     @AppStorage("uid") var userID: String  = ""
     @AppStorage("username") var username: String = ""
@@ -88,13 +88,11 @@ struct HomepageView: View {
             }
             
         }
-        
-        
     }
 }
 
-struct HomepageView_Previews: PreviewProvider {
+struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        HomepageView()
+        SearchView()
     }
 }

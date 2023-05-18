@@ -15,14 +15,93 @@ struct SettingsView: View {
     @AppStorage("username") var username: String = ""
     
     var body: some View {
-        Button {
-            view = "home"
-        } label: {
-            Text("Epic transition to home. username = \(username)")
+        ZStack{
+            VStack {
+                Text("Currentview is \(view)")
+                Spacer()
+                Button {
+                    let firebaseAuth = Auth.auth()
+                    do {
+                      try firebaseAuth.signOut()
+                        userID = ""
+                    } catch let signOutError as NSError {
+                      print("Error signing out: %@", signOutError)
+                    }
+                } label: {
+                    Text("log out")
+                }
+                Spacer()
+                HStack{
+                    Button {
+                        view = "home"
+                    } label: {
+                        VStack {
+                            Image(systemName: "house")
+                                .resizable()
+                                .foregroundColor(.black)
+                                .frame(width: 30, height: 30)
+                                .scaledToFill()
+                                .clipped()
+                            
+                            Text("Home")
+                                .foregroundColor(.black)
+                                .font(.custom(
+                                    "SanFrancisco",
+                                    size: 8,
+                                    relativeTo: .body))
+                            
+                        }
+                        
+                    }
+                    .padding()
+                    Button {
+                        view = "settings"
+                    } label: {
+                        VStack {
+                            Image(systemName: "gearshape")
+                                .resizable()
+                                .foregroundColor(.black)
+                                .frame(width: 30, height: 30)
+                                .scaledToFill()
+                                .clipped()
+                            
+                            Text("Settings")
+                                .foregroundColor(.black)
+                                .font(.custom(
+                                    "SanFrancisco",
+                                    size: 8,
+                                    relativeTo: .body))
+                            
+                        }
+                        
+                    }
+                    .padding()
+                    Button {
+                        view = "quizcreator"
+                    } label: {
+                        VStack {
+                            Image(systemName: "plus.square")
+                                .resizable()
+                                .foregroundColor(.black)
+                                .frame(width: 30, height: 30)
+                                .scaledToFill()
+                                .clipped()
+                            
+                            Text("Create Quiz")
+                                .foregroundColor(.black)
+                                .font(.custom(
+                                    "SanFrancisco",
+                                    size: 8,
+                                    relativeTo: .body))
+                            
+                        }
+                        
+                    }
+                    .padding()
+                }
+            }
+            
         }
-        
-        Spacer()
-        
         Button {
             let firebaseAuth = Auth.auth()
             do {
