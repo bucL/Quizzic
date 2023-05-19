@@ -11,6 +11,7 @@ import FirebaseCore
 import FirebaseFirestore
 
 
+var view: String?
 
 @main
 struct YourApp: App {

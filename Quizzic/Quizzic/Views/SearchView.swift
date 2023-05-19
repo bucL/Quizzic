@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct SearchView: View {
-    @AppStorage("currentView") var view: String = "home"
+    // View is simply just in the main QuizzicApp.swift file
     @AppStorage("uid") var userID: String  = ""
     @AppStorage("username") var username: String = ""
     
     var body: some View {
         ZStack{
             VStack {
-                Text("Currentview is \(view)")
+                Text("Currentview is searchview")
                 Spacer()
                 HStack{
                     Button {
@@ -63,7 +63,7 @@ struct SearchView: View {
                     }
                     .padding()
                     Button {
-                        view = "quizcreator"
+                        var view = "quizcreator"
                     } label: {
                         VStack {
                             Image(systemName: "plus.square")

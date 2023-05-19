@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct QuizCreator: View {
-    @AppStorage("currentView") var view: String = "home"
+    // Currently errors occur because view only exists in one file. 
     @AppStorage("uid") var userID: String  = ""
     @AppStorage("username") var username: String = ""
     var body: some View {
         
         ZStack{
             VStack {
-                Text("Currentview is \(view)")
+                Text("Currentview is quiz creator")
                 Spacer()
                 HStack{
                     Button {
-                        view = "home"
+                        var view = "home"
                     } label: {
                         VStack {
                             Image(systemName: "house")

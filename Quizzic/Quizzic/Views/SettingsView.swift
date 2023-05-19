@@ -10,15 +10,16 @@ import Firebase
 import FirebaseAuth
 
 struct SettingsView: View {
-    @AppStorage("currentView") var view: String = "home"
+    // Currently errors occur because view only exists in one file. 
     @AppStorage("uid") var userID: String  = ""
     @AppStorage("username") var username: String = ""
     
     var body: some View {
         ZStack{
             VStack {
-                Text("Currentview is \(view)")
-                Spacer()
+                Text("Currentview is settingsview")
+                    .padding()
+                
                 Button {
                     let firebaseAuth = Auth.auth()
                     do {
@@ -30,7 +31,7 @@ struct SettingsView: View {
                 } label: {
                     Text("log out")
                 }
-                Spacer()
+                
                 HStack{
                     Button {
                         view = "home"

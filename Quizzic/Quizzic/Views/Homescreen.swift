@@ -11,7 +11,6 @@ import FirebaseFirestore
 
 
 struct Homescreen: View {
-    @AppStorage("currentView") var view: String = "home"
     @AppStorage("uid") var userID: String  = ""
     @AppStorage("username") var username: String = ""
     
@@ -27,8 +26,6 @@ struct Homescreen: View {
         //                    Label("Settings", systemImage: "gearshape.fill")
         //                }
         //        }
-        
-        
         
         if view == "home" {
             HomepageView()
