@@ -33,6 +33,11 @@ struct ContentView: View {
 //                } label: {
 //                    Text("Sign Out")
 //                }
+            
+            
+            /// I think TabView has to go here in order for it to work properly since it wasn't working when placed in the homescreen file;
+            
+            
                 Homescreen()
             }
             
