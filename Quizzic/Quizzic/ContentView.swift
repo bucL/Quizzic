@@ -36,9 +36,28 @@ struct ContentView: View {
             
             
             /// I think TabView has to go here in order for it to work properly since it wasn't working when placed in the homescreen file;
+            /// Homescreen()
             
-            
+            TabView {
+                QuizCreator()
+                    .tabItem {
+                        Label("Create", systemImage: "plus.square")
+                    }
+                SearchView()
+                    .tabItem {
+                        Label("Search", systemImage: "magnifyingglass")
+                    }
                 Homescreen()
+                    .tabItem {
+                        Label("Homepage", systemImage: "house")
+                    }
+                SettingsView()
+                    .tabItem {
+                        Label("Settings", systemImage: "gearshape.circle")
+                    }
+            }
+            
+                
             }
             
         }

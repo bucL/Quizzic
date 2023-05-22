@@ -27,8 +27,8 @@ struct Homescreen: View {
         //                }
         //        }
         
-        if view == "home" {
-            HomepageView()
+//        if view == "home" {
+//            HomepageView()
             
             //            ZStack {
             //                Button {
@@ -37,20 +37,20 @@ struct Homescreen: View {
             //                    Text("Click Me. Current View \(view). \(username)")
             //                }
             //            }
-        } else if view == "settings" {
-            SettingsView()
+//        } else if view == "settings" {
+//            SettingsView()
             
             //            Button {
             //                view =  "home"
             //            } label: {
             //                Text("Click Me. Current view \(view). \(username)")
             //            }
-        } else if view == "quizcreate" {
-            QuizCreator()
-        } else if view == "search" {
-            SearchView()
-        }
-        
+//        } else if view == "quizcreate" {
+//            QuizCreator()
+//        } else if view == "search" {
+//            SearchView()
+//        }
+        Text("Homescreen")
         
     }
 }
