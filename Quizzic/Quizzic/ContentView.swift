@@ -18,27 +18,52 @@ struct ContentView: View {
             
             AuthView()
         } else {
-            VStack {
-                Text("Logged In. User id is \(userID). Username is \(username)")
-                
-                Button {
-                    let firebaseAuth = Auth.auth()
-                    do {
-                        try firebaseAuth.signOut()
-                        userID = ""
-                        username = ""
-                    } catch let signOutError as NSError {
-                        print("Error signing out: %@", signOutError)
+//            VStack {
+//                Text("Logged In. User id is \(userID). Username is \(username)")
+//
+//                Button {
+//                    let firebaseAuth = Auth.auth()
+//                    do {
+//                        try firebaseAuth.signOut()
+//                        userID = ""
+//                        username = ""
+//                    } catch let signOutError as NSError {
+//                        print("Error signing out: %@", signOutError)
+//                    }
+//                } label: {
+//                    Text("Sign Out")
+//                }
+            
+            
+            /// I think TabView has to go here in order for it to work properly since it wasn't working when placed in the homescreen file;
+            /// Homescreen()
+            
+            TabView {
+                QuizCreator()
+                    .tabItem {
+                        Label("Create", systemImage: "plus.square")
                     }
-                } label: {                    Text("Sign Out")
-                }
-                //Homescreen()
+                SearchView()
+                    .tabItem {
+                        Label("Search", systemImage: "magnifyingglass")
+                    }
+                Homescreen()
+                    .tabItem {
+                        Label("Homepage", systemImage: "house")
+                    }
+                SettingsView()
+                    .tabItem {
+                        Label("Settings", systemImage: "gearshape.circle")
+                    }
+            }
+            
+                
             }
             
         }
         
     }
-}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
