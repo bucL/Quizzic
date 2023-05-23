@@ -15,8 +15,32 @@ struct SettingsView: View {
     @AppStorage("username") var username: String = ""
     
     var body: some View {
+        
         VStack {
-            Text("Settings View")
+            HStack{
+                Image("UserDefaultImage")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                    .clipShape(Circle())
+                    .padding()
+                Text("\(username)")
+                    .font(.headline)
+                    .padding(.leading, 10)
+                Spacer()
+                
+                
+            }
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(lineWidth: 2)
+                    .foregroundColor(.black)
+                    .opacity(0.6)
+                    
+            )
+            .padding()
+            
+            Spacer()
+            
             
             Button {
                 let firebaseAuth = Auth.auth()
@@ -28,10 +52,22 @@ struct SettingsView: View {
                 }
             } label: {
                 Text("log out")
+                    .foregroundColor(.white)
+                    .font(.title3)
+                    .bold()
+                
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background (
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.black)
+                    )
+                    .padding(.horizontal)
             }
             
             
         }
+        .padding()
         
         
         

@@ -15,8 +15,24 @@ struct Homescreen: View {
     @AppStorage("username") var username: String = ""
     
     var body: some View {
-
-        Text("Homescreen")
+        ZStack {
+            VStack {
+                Text("Welcome Back \(username)")
+                    .font(.title)
+                    .bold()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(.green)
+                
+                Spacer()
+            }
+            
+            
+            
+            
+        }
+        
         
     }
 }

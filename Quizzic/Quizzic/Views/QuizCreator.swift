@@ -11,12 +11,7 @@ struct QuizCreator: View {
     @AppStorage("uid") var userID: String  = ""
     @AppStorage("username") var username: String = ""
     @State private var numberOfQuestions: Float = 0
-    @State private var question = [String]()
-//    @State private var question = ""
-//    @State private var option1 = ""
-//    @State private var option2 = ""
-//    @State private var option3 = ""
-//    @State private var answer = ""
+
     var body: some View {
         ScrollView{
             VStack {
@@ -42,17 +37,20 @@ struct QuizCreator: View {
                         .fontWeight(.thin)
                         .padding()
                 }
-                
-                ForEach (1..<Int(numberOfQuestions)+1, id: \.self) {index in
-                     Text("question \(index)")
-//                    VStack {
-//                        TextField("Question...", text: $question[index])
-//                        TextField("Option 1...", text: $option1)
-//                        TextField("Option 2...", text: $option2)
-//                        TextField("Option 3...", text: $option3)
-//                        TextField("Answer...", text: $answer)
-//
-//                    }
+
+                ForEach (0..<Int(numberOfQuestions), id: \.self) {index in
+                    VStack {
+                        Text("Question \(index+1)")
+                            .font(.title2)
+                            .padding()
+                            .frame(alignment: .leading)
+                        QuestionMaker()
+                    }
+                    
+                    
+                    
+
+                    }
                     
                     
                 }
@@ -66,7 +64,7 @@ struct QuizCreator: View {
             
         }
     }
-}
+
     struct QuizCreator_Previews: PreviewProvider {
         static var previews: some View {
             QuizCreator()
