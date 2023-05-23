@@ -15,41 +15,7 @@ struct Homescreen: View {
     @AppStorage("username") var username: String = ""
     
     var body: some View {
-        
-        //        TabView {
-        //            Homescreen()
-        //                .tabItem {
-        //                    Label("Home", systemImage: "house.fill")
-        //                }
-        //            SettingsView()
-        //                .tabItem {
-        //                    Label("Settings", systemImage: "gearshape.fill")
-        //                }
-        //        }
-        
-//        if view == "home" {
-//            HomepageView()
-            
-            //            ZStack {
-            //                Button {
-            //                    view = "settings"
-            //                } label: {
-            //                    Text("Click Me. Current View \(view). \(username)")
-            //                }
-            //            }
-//        } else if view == "settings" {
-//            SettingsView()
-            
-            //            Button {
-            //                view =  "home"
-            //            } label: {
-            //                Text("Click Me. Current view \(view). \(username)")
-            //            }
-//        } else if view == "quizcreate" {
-//            QuizCreator()
-//        } else if view == "search" {
-//            SearchView()
-//        }
+
         Text("Homescreen")
         
     }
