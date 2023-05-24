@@ -15,46 +15,62 @@ struct Homescreen: View {
     @AppStorage("username") var username: String = ""
     
     var body: some View {
-        
-        //        TabView {
-        //            Homescreen()
-        //                .tabItem {
-        //                    Label("Home", systemImage: "house.fill")
-        //                }
-        //            SettingsView()
-        //                .tabItem {
-        //                    Label("Settings", systemImage: "gearshape.fill")
-        //                }
-        //        }
-        
-//        if view == "home" {
-//            HomepageView()
-            
-            //            ZStack {
-            //                Button {
-            //                    view = "settings"
-            //                } label: {
-            //                    Text("Click Me. Current View \(view). \(username)")
-            //                }
-            //            }
-//        } else if view == "settings" {
-//            SettingsView()
-            
-            //            Button {
-            //                view =  "home"
-            //            } label: {
-            //                Text("Click Me. Current view \(view). \(username)")
-            //            }
-//        } else if view == "quizcreate" {
-//            QuizCreator()
-//        } else if view == "search" {
-//            SearchView()
-//        }
-        Text("Homescreen")
+        NavigationView {
+            ZStack {
+                VStack {
+                    Text("Welcome Back \(username)")
+                        .onAppear{
+                            getQuizNames()
+                        }
+                        .font(.title)
+                        .bold()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(.green)
+                    
+                    Spacer()
+                    
+                    NavigationLink(destination: QuizzesView()) {
+                        GeometryReader { geometry in
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 5)
+                                    .fill(Color.cyan)
+                                    .frame(width: geometry.size.width * 0.5, height: 100)
+                                    .padding()
+                                Text("Take a Quiz")
+                                    .foregroundColor(.white)
+                                    .font(.title3)
+                                
+                            }
+                            
+                        }
+                        .padding()
+                        .frame(alignment: .center)
+                        
+                        Spacer()
+                        
+                        
+                    }
+                    
+                    Spacer()
+                }
+                
+                
+                
+                
+            }
+            .navigationBarHidden(true)
+        }
         
     }
+    
+    
+    
+    
+    
+    
 }
-
 struct Homescreen_Previews: PreviewProvider {
     static var previews: some View {
         Homescreen()

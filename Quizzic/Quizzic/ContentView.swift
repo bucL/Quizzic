@@ -39,6 +39,10 @@ struct ContentView: View {
             /// Homescreen()
             
             TabView {
+                Homescreen()
+                    .tabItem {
+                        Label("Homepage", systemImage: "house")
+                    }
                 QuizCreator()
                     .tabItem {
                         Label("Create", systemImage: "plus.square")
@@ -47,14 +51,11 @@ struct ContentView: View {
                     .tabItem {
                         Label("Search", systemImage: "magnifyingglass")
                     }
-                Homescreen()
-                    .tabItem {
-                        Label("Homepage", systemImage: "house")
-                    }
                 SettingsView()
                     .tabItem {
                         Label("Settings", systemImage: "gearshape.circle")
                     }
+                            
             }
             
                 

@@ -10,118 +10,64 @@ import Firebase
 import FirebaseAuth
 
 struct SettingsView: View {
-    // Currently errors occur because view only exists in one file. 
+    
     @AppStorage("uid") var userID: String  = ""
     @AppStorage("username") var username: String = ""
     
     var body: some View {
-//        ZStack{
-//            VStack {
-//                Text("Currentview is settingsview")
-//                    .padding()
-//
-//                Button {
-//                    let firebaseAuth = Auth.auth()
-//                    do {
-//                      try firebaseAuth.signOut()
-//                        userID = ""
-//                    } catch let signOutError as NSError {
-//                      print("Error signing out: %@", signOutError)
-//                    }
-//                } label: {
-//                    Text("log out")
-//                }
-//
-//                HStack{
-//                    Button {
-//                        view = "home"
-//                    } label: {
-//                        VStack {
-//                            Image(systemName: "house")
-//                                .resizable()
-//                                .foregroundColor(.black)
-//                                .frame(width: 30, height: 30)
-//                                .scaledToFill()
-//                                .clipped()
-//
-//                            Text("Home")
-//                                .foregroundColor(.black)
-//                                .font(.custom(
-//                                    "SanFrancisco",
-//                                    size: 8,
-//                                    relativeTo: .body))
-//
-//                        }
-//
-//                    }
-//                    .padding()
-//                    Button {
-//                        view = "settings"
-//                    } label: {
-//                        VStack {
-//                            Image(systemName: "gearshape")
-//                                .resizable()
-//                                .foregroundColor(.black)
-//                                .frame(width: 30, height: 30)
-//                                .scaledToFill()
-//                                .clipped()
-//
-//                            Text("Settings")
-//                                .foregroundColor(.black)
-//                                .font(.custom(
-//                                    "SanFrancisco",
-//                                    size: 8,
-//                                    relativeTo: .body))
-//
-//                        }
-//
-//                    }
-//                    .padding()
-//                    Button {
-//                        view = "quizcreator"
-//                    } label: {
-//                        VStack {
-//                            Image(systemName: "plus.square")
-//                                .resizable()
-//                                .foregroundColor(.black)
-//                                .frame(width: 30, height: 30)
-//                                .scaledToFill()
-//                                .clipped()
-//
-//                            Text("Create Quiz")
-//                                .foregroundColor(.black)
-//                                .font(.custom(
-//                                    "SanFrancisco",
-//                                    size: 8,
-//                                    relativeTo: .body))
-//
-//                        }
-//
-//                    }
-//                    .padding()
-//                }
-//            }
-//
-//        }
         
         VStack {
-            Text("Settings View")
+            HStack{
+                Image("UserDefaultImage")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+                    .clipShape(Circle())
+                    .padding()
+                Text("\(username)")
+                    .font(.headline)
+                    .padding(.leading, 10)
+                Spacer()
+
+
+            }
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(lineWidth: 2)
+                    .foregroundColor(.black)
+                    .opacity(0.6)
+                
+            )
+            .padding()
+            
+            Spacer()
+            
             
             Button {
                 let firebaseAuth = Auth.auth()
                 do {
-                  try firebaseAuth.signOut()
+                    try firebaseAuth.signOut()
                     userID = ""
                 } catch let signOutError as NSError {
-                  print("Error signing out: %@", signOutError)
+                    print("Error signing out: %@", signOutError)
                 }
             } label: {
                 Text("log out")
+                    .foregroundColor(.white)
+                    .font(.title3)
+                    .bold()
+                
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background (
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.black)
+                    )
+                    .padding()
             }
             
             
         }
-        
+        .padding()
         
         
     }

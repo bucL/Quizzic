@@ -14,7 +14,7 @@ import FirebaseFirestore
 var view: String?
 
 @main
-struct YourApp: App {
+struct QuizzicApp: App {
 
     
     init() {
