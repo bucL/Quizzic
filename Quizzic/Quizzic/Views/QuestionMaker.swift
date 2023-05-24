@@ -39,13 +39,14 @@ struct QuestionMaker: View {
         .padding()
         
         Button {
+            // Bug when attempting to edit questions it adds another key-value pair instead of properly changing the previous question. 
             questions["\(tempQuestion)"] = "\(tempAnswer)"
             print(questions)
         } label: {
             Text("Save Question")
                 .frame(height: 50)
                 .frame(maxWidth: .infinity)
-                .background(Color.green)
+                .background(Color.red)
                 .clipShape(Capsule())
                 .foregroundColor(.white)
                 .padding()
