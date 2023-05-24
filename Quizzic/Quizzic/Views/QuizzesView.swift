@@ -8,21 +8,41 @@
 import SwiftUI
 import FirebaseFirestore
 
+
+var currentQuiz: String = ""
+
 struct QuizzesView: View {
+@State private var navigate = false
     var body: some View {
         
         VStack {
             
             Text("Choose A Quiz")
+                .font(.title)
+                .bold()
+            
+            
+            
             
             ScrollView{
                 LazyVGrid (columns: createGrid()){
                     ForEach(quizzesArray, id:\.self) { quiz in
-                        Text("\(quiz)")
-                            .frame(width: 50, height: 50)
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                        // doesn't acutally navigate to the new view.
+                        NavigationLink (destination: TakeQuiz(), isActive: $navigate) {
+                            Button {
+                                getQuizInfo(quizName: "\(quiz)")
+                                navigate = true
+                            }label: {
+                                Text("\(quiz)")
+                                    .frame(width: 100, height: 100)
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                                 
+                            }
+                            
+                        }
+                        
                     }
                 }
                 .padding()
