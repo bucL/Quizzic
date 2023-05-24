@@ -10,7 +10,7 @@ import Firebase
 import FirebaseAuth
 
 struct SettingsView: View {
-
+    
     @AppStorage("uid") var userID: String  = ""
     @AppStorage("username") var username: String = ""
     
@@ -27,15 +27,15 @@ struct SettingsView: View {
                     .font(.headline)
                     .padding(.leading, 10)
                 Spacer()
-                
-                
+
+
             }
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(lineWidth: 2)
                     .foregroundColor(.black)
                     .opacity(0.6)
-                    
+                
             )
             .padding()
             
@@ -45,10 +45,10 @@ struct SettingsView: View {
             Button {
                 let firebaseAuth = Auth.auth()
                 do {
-                  try firebaseAuth.signOut()
+                    try firebaseAuth.signOut()
                     userID = ""
                 } catch let signOutError as NSError {
-                  print("Error signing out: %@", signOutError)
+                    print("Error signing out: %@", signOutError)
                 }
             } label: {
                 Text("log out")
@@ -62,13 +62,12 @@ struct SettingsView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color.black)
                     )
-                    .padding(.horizontal)
+                    .padding()
             }
             
             
         }
         .padding()
-        
         
         
     }

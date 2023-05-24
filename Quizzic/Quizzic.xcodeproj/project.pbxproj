@@ -23,8 +23,9 @@
 		687913272A090C1500B64840 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 687913262A090C1500B64840 /* FirebaseStorage */; };
 		6879132A2A09108C00B64840 /* Homescreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687913292A09108C00B64840 /* Homescreen.swift */; };
 		68A331CB29C3C83B00457300 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68A331CA29C3C83B00457300 /* GoogleService-Info.plist */; };
-		68BC69AA2A1D7CD70062E4A1 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BC69A92A1D7CD70062E4A1 /* Question.swift */; };
+		68BC69AA2A1D7CD70062E4A1 /* VariablesAndFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BC69A92A1D7CD70062E4A1 /* VariablesAndFunctions.swift */; };
 		68BC69AC2A1D7FD20062E4A1 /* QuestionMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BC69AB2A1D7FD20062E4A1 /* QuestionMaker.swift */; };
+		68BC69AE2A1DA2050062E4A1 /* QuizzesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BC69AD2A1DA2050062E4A1 /* QuizzesView.swift */; };
 		68D255CF29BBDE13003A306A /* QuizzicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D255CE29BBDE13003A306A /* QuizzicApp.swift */; };
 		68D255D329BBDE14003A306A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68D255D229BBDE14003A306A /* Assets.xcassets */; };
 		68D255D629BBDE14003A306A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68D255D529BBDE14003A306A /* Preview Assets.xcassets */; };
@@ -61,8 +62,9 @@
 		687913192A090A6100B64840 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		687913292A09108C00B64840 /* Homescreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homescreen.swift; sourceTree = "<group>"; };
 		68A331CA29C3C83B00457300 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		68BC69A92A1D7CD70062E4A1 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		68BC69A92A1D7CD70062E4A1 /* VariablesAndFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariablesAndFunctions.swift; sourceTree = "<group>"; };
 		68BC69AB2A1D7FD20062E4A1 /* QuestionMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionMaker.swift; sourceTree = "<group>"; };
+		68BC69AD2A1DA2050062E4A1 /* QuizzesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzesView.swift; sourceTree = "<group>"; };
 		68D255CB29BBDE13003A306A /* Quizzic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quizzic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68D255CE29BBDE13003A306A /* QuizzicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzicApp.swift; sourceTree = "<group>"; };
 		68D255D229BBDE14003A306A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				682B60FA2A16DC5E001D0297 /* QuizCreator.swift */,
 				682B60FC2A16E63D001D0297 /* SearchView.swift */,
 				68BC69AB2A1D7FD20062E4A1 /* QuestionMaker.swift */,
+				68BC69AD2A1DA2050062E4A1 /* QuizzesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -166,7 +169,7 @@
 				687913192A090A6100B64840 /* ContentView.swift */,
 				68D255D229BBDE14003A306A /* Assets.xcassets */,
 				68D255D429BBDE14003A306A /* Preview Content */,
-				68BC69A92A1D7CD70062E4A1 /* Question.swift */,
+				68BC69A92A1D7CD70062E4A1 /* VariablesAndFunctions.swift */,
 			);
 			path = Quizzic;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				687913162A0907CC00B64840 /* SignUpView.swift in Sources */,
 				687913182A0908F200B64840 /* AuthView.swift in Sources */,
 				68BC69AC2A1D7FD20062E4A1 /* QuestionMaker.swift in Sources */,
+				68BC69AE2A1DA2050062E4A1 /* QuizzesView.swift in Sources */,
 				6879131A2A090A6100B64840 /* ContentView.swift in Sources */,
 				6870054E2A0C809800448316 /* SettingsView.swift in Sources */,
 				687913142A09053500B64840 /* String.swift in Sources */,
@@ -348,7 +352,7 @@
 				68D255CF29BBDE13003A306A /* QuizzicApp.swift in Sources */,
 				6879132A2A09108C00B64840 /* Homescreen.swift in Sources */,
 				682B60FB2A16DC5E001D0297 /* QuizCreator.swift in Sources */,
-				68BC69AA2A1D7CD70062E4A1 /* Question.swift in Sources */,
+				68BC69AA2A1D7CD70062E4A1 /* VariablesAndFunctions.swift in Sources */,
 				682B60FD2A16E63D001D0297 /* SearchView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

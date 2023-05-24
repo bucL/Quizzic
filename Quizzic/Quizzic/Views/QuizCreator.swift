@@ -14,6 +14,7 @@ struct QuizCreator: View {
     @AppStorage("username") var username: String = ""
     @State private var numberOfQuestions: Float = 0
     @State private var quizName: String = ""
+    @State private var showAlert = false
     
     var body: some View {
         ScrollView{
@@ -65,20 +66,28 @@ struct QuizCreator: View {
 
                 
                 Button {
-                    let docData = questions
-                    let db = Firestore.firestore()
-                    
-                    db.collection("quizzes").document("\(quizName)").setData(docData) { err in
-                        if let err = err {
-                            print("Error uploading quiz")
-                        } else {
-                            print("successfully uploaded to firebase")
+                    if questions == [:] {
+                        showAlert = true
+                    } else {
+                        let docData = questions
+                        let db = Firestore.firestore()
+                        
+                        db.collection("quizzes").document("\(quizName)").setData(docData) { err in
+                            if err != nil {
+                                print("Error uploading quiz")
+                            } else {
+                                print("successfully uploaded to firebase")
+                            }
                         }
+
                     }
-                    
+                                        
                     
                 } label: {
                     Text("Save Quiz")
+                        .alert("Please create a question before trying to save the quiz", isPresented: $showAlert) {
+                            Button("Okay!", role: .cancel) {}
+                        }
                         .frame(height: 50)
                         .frame(maxWidth: .infinity)
                         .background(Color.green)

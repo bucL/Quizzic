@@ -62,7 +62,7 @@ struct QuestionMaker: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .foregroundColor(.white)
                     .padding()
-
+                    .offset(y: -25)
             } else {
                 Text("Edit Question")
                     .frame(height: 50)
@@ -71,6 +71,7 @@ struct QuestionMaker: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .foregroundColor(.white)
                     .padding()
+                    .offset(y: -25)
             }
         }
         
