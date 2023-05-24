@@ -13,9 +13,11 @@ import Firebase
 struct QuestionMaker: View {
     @State private var tempQuestion: String = ""
     @State private var tempAnswer: String = ""
+    @State private var isEditable = true
     var body: some View {
         VStack {
             TextField("Question...", text:$tempQuestion)
+                .disabled(!isEditable)
                 .padding()
                 .frame(height: 50)
                 .overlay(
@@ -25,6 +27,7 @@ struct QuestionMaker: View {
                 )
 
             TextField("Answer...", text:$tempAnswer)
+                .disabled(!isEditable)
                 .padding()
                 .frame(height:50)
                 .overlay(
@@ -37,19 +40,38 @@ struct QuestionMaker: View {
                 )
         }
         .padding()
-        
         Button {
-            // Bug when attempting to edit questions it adds another key-value pair instead of properly changing the previous question. 
-            questions["\(tempQuestion)"] = "\(tempAnswer)"
-            print(questions)
+            // Bug when attempting to edit questions it adds another key-value pair instead of properly changing the previous question.
+            if isEditable == true {
+                isEditable = false
+                questions["\(tempQuestion)"] = "\(tempAnswer)"
+                print(questions)
+            } else {
+                questions.removeValue(forKey: tempQuestion)
+                print(questions)
+                isEditable = true
+            }
+            
         } label: {
-            Text("Save Question")
-                .frame(height: 50)
-                .frame(maxWidth: .infinity)
-                .background(Color.red)
-                .clipShape(Capsule())
-                .foregroundColor(.white)
-                .padding()
+            
+            if isEditable == true {
+                Text("Save Question")
+                    .frame(height: 50)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.red)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .foregroundColor(.white)
+                    .padding()
+
+            } else {
+                Text("Edit Question")
+                    .frame(height: 50)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.red)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .foregroundColor(.white)
+                    .padding()
+            }
         }
         
         Spacer()
