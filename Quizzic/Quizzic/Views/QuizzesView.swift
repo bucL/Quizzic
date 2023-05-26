@@ -27,6 +27,7 @@ struct QuizzesView: View {
                             // doesn't acutally navigate to the new view.
                             Button {
                                 getQuizInfo(quizName: "\(quiz)")
+                                nameOfCurrentQuiz = quiz
                                 // Scrappy solution to the next screen from being empty as by adding a delay we can ensure that firebase has enough time to retrieve the data. Plans to implement better solution in the future that updates the view when the array of questions is not empty ie != nil.
                                 DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
                                     navigate = true

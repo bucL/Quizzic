@@ -20,6 +20,7 @@ var quizzesArrayLength = 0
 var userAnswers: [String : String] = [:]
 var actualQuestions: [String] = []
 var questionsCount: Int = 0
+var nameOfCurrentQuiz = ""
 
 // Function to retrive the names of quizzes from Firebase
 func getQuizNames() {
