@@ -37,7 +37,6 @@ struct QuizCreator: View {
                     )
                     .padding()
                 
-                // Need feedback/advice from the class on how to continue from this stage and what my users would prefer. A scrollview where the user sets a number of questions that they want and keeps scrolling to find new boxes to fill or a navigationstyle view thing where they want buttons that take them to the next question. In terms of implementation a scrollview will be easier
                 Text("Specify a number of questions: \(Int(numberOfQuestions))")
                 Slider(value: $numberOfQuestions, in: 0...20, step: 1)
                 {

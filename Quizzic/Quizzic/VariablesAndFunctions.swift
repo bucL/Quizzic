@@ -10,7 +10,7 @@ import Firebase
 import FirebaseFirestore
 import SwiftUI
 
-// Dictionary that creates 
+// Dictionary that stores the questions as keys and answers as value.
 var questions: [String: String] = [:]
 var quizzesArray: [String] = []
 var quizzesArrayLength = 0
