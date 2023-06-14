@@ -30,24 +30,26 @@ struct Homescreen: View {
                         .background(.green)
                     
                     Spacer()
+                    Spacer()
                     
                     NavigationLink(destination: QuizzesView()) {
                         GeometryReader { geometry in
                             ZStack{
                                 RoundedRectangle(cornerRadius: 5)
                                     .fill(Color.cyan)
-                                    .frame(width: geometry.size.width * 0.5, height: 100)
+                                    .frame(width: geometry.size.width * 0.5, height: 100, alignment: .trailing)
                                     .padding()
                                 Text("Take a Quiz")
                                     .foregroundColor(.white)
                                     .font(.title3)
                                 
                             }
+                            .offset(x: 75)
+                            .padding()
+
                             
                         }
-                        .padding()
-                        .frame(alignment: .center)
-                        
+                                                
                         Spacer()
                         
                         

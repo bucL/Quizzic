@@ -45,6 +45,7 @@ struct LogInView: View {
                 HStack {
                     Image(systemName: "mail")
                     TextField("Email", text:$email)
+                        .autocapitalization(.none)
                     
                     Spacer()
                     
@@ -70,6 +71,7 @@ struct LogInView: View {
                 HStack {
                     Image(systemName: "lock")
                     SecureField("Password", text:$password)
+                        .autocapitalization(.none)
                     
                     Spacer()
                     
