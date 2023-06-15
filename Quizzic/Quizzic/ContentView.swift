@@ -8,6 +8,18 @@
 import SwiftUI
 import FirebaseAuth
 
+/* REMARK @bucL
+* What is going on in this file? 
+*
+* You have almost no commenting, you are not going to
+* have a good time going back and commenting these files
+* you should ensure that you are commenting as you go.
+*
+* Likewise, you should make sure you are separating 
+* your screen elements into views, using the features
+* of swiftui to make your app interactive. Like @state 
+*/
+
 struct ContentView: View {
     
     @AppStorage("uid") var userID: String  = ""
