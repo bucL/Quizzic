@@ -5,6 +5,20 @@
 //  Created by Aaditya Shankar on 11/5/2023.
 //
 
+/*
+* REMARK: @bucL
+* Once again you have not commented your code,
+* it is very clear when you return to a file 
+* with less understanding of what happened and 
+* attempt to comment that code. 
+*
+* You are also not binding this to any kind of 
+* state or environment object. So these settings
+* will not be persisted around the application.
+* You need to look into the best practices for handling
+* data and its transfer. 
+*/
+
 import SwiftUI
 import Firebase
 import FirebaseAuth

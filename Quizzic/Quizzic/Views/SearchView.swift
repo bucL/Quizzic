@@ -5,6 +5,14 @@
 //  Created by Aaditya Shankar on 19/5/2023.
 //
 
+/* REMARK: @bucL
+* What does this file even do? 
+* You should plan out your user interface and screens
+* before you act. This will save you time and 
+* give you a direction to head in.
+*
+*/
+
 import SwiftUI
 
 struct SearchView: View {

@@ -11,6 +11,15 @@ import SwiftUI
 
 //Above issue has been solved and program no longer crashes or displays 0.
 
+/* REMARK: @bucL
+* You need to format this code better, either 
+* using the Xcode built in tools or with a formatter.
+*
+* You likewise need to make this code more debugable with variables
+* and data passing rather than hard coding where everything is. 
+* By having a traceable path of information in your app. You will be 
+* able to use XCode's built in tools to follow the problems. 
+*/
 
 struct TakeQuiz: View {
     var body: some View {

@@ -10,6 +10,31 @@ import Firebase
 import FirebaseFirestore
 import SwiftUI
 
+/* REMARK @bucL
+* Overall comment
+* What is the purpose of this file? Have you actually thought about how 
+* your project should be structured? I would recommend that you have 
+* logic in a separate file and your storage (models) placed in a different place.
+* Currently you seem to have a bunch of logic in this file, and it also 
+* stores data about what a quiz or question is. 
+*
+* I would separate a quiz and a question out into separate files. 
+* I would then have a separate file for the logic in the quiz screen
+* Likewise, I would also want to separate out the database logic into 
+* an OBSERVABLE object, that way when the database updates,
+* your UI can update automatically
+*
+* Furthermore, your commenting is fairly bare bones.
+* You need to make sure you are explaining your logic and your 
+* decisions. you should also explain your variables, as they 
+* are a decision that you have made. 
+*
+* You should use a docstring for your functions. I have provided
+* an example for your first function, notice how it is displayed in
+* XCode.
+*
+*/
+
 // Dictionary that stores the questions as keys and answers as value.
 var questions: [String: String] = [:]
 var quizzesArray: [String] = []
@@ -22,7 +47,19 @@ var actualQuestions: [String] = []
 var questionsCount: Int = 0
 var nameOfCurrentQuiz = ""
 
-// Function to retrive the names of quizzes from Firebase
+/**
+ Retrieves the name of a quiz from firebase.
+
+ - Parameter NONE
+
+ - Throws: `MyError.FIREBASEERROR`
+           if `recipient` is "Derek"
+           (he knows what he did).
+
+ - Returns: NONE 
+            (Modifies quizzesArray 
+            in a global state)
+ */
 func getQuizNames() {
     let db = Firestore.firestore()
     let collectionReference = db.collection("quizzes")

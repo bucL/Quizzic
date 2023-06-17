@@ -5,6 +5,16 @@
 //  Created by Aaditya Shankar on 24/5/2023.
 //
 
+/* REMARK: @bucL
+* Sounding like a broken record at this point
+* but you have not commented your code, 
+* likewise you are using firestore directly 
+* in view code, rather than in your database
+* object, which should handle all your database 
+* functions.
+*
+*/
+
 import SwiftUI
 import FirebaseFirestore
 
