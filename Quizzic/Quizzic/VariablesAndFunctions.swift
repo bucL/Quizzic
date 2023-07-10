@@ -38,7 +38,6 @@ import SwiftUI
 // Dictionary that stores the questions as keys and answers as value.
 var questions: [String: String] = [:]
 var quizzesArray: [String] = []
-var quizzesArrayLength = 0
 
 //these may or may not be needed depedning on how the navigation view implementation goes ahead in TakeQuiz.swift
 // Variables to store user input and questions that are retrieved from firebase
@@ -64,8 +63,6 @@ func getQuizNames() {
     let db = Firestore.firestore()
     let collectionReference = db.collection("quizzes")
     quizzesArray = []
-    quizzesArrayLength = 0
-    
     collectionReference.getDocuments { (snapshot, error) in
         if let error = error {
             print("error getting documents: \(error)")
@@ -78,16 +75,13 @@ func getQuizNames() {
         }
         
         for document in documents {
-            quizzesArrayLength = quizzesArrayLength + 1
             let documentName = document.documentID
             quizzesArray.append(documentName)
             //This line may be causing issues needs to be traced back
-            questionsCount += 1
             print("Document name: \(documentName)")
             print(quizzesArray)
         }
         
-        print(quizzesArrayLength)
     }
 }
 

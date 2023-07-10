@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct DisplayQuestion: View {
+    let questionNumber: Int
     @State var isEditable = true
     @State var tempUserAnswer: String = ""
     var body: some View {
@@ -21,18 +22,17 @@ struct DisplayQuestion: View {
             Button {
                 if isEditable == true {
                     isEditable = false
-                    userAnswers[QuestionManager.shared.actualQuestion] = tempUserAnswer
-                    
-                } else {
-                    userAnswers.removeValue(forKey: QuestionManager.shared.actualQuestion)
+                    userAnswers[actualQuestions[questionNumber]] = tempUserAnswer
                     print(userAnswers)
+                } else {
                     isEditable = true
+                    userAnswers[actualQuestions[questionNumber]] = ""
+                    print(userAnswers)
                 }
                 
             } label: {
-                
                 if isEditable == true {
-                    Text("Save Question")
+                    Text("Save Answer")
                         .frame(height: 50)
                         .frame(maxWidth: .infinity)
                         .background(Color.red)
@@ -41,7 +41,7 @@ struct DisplayQuestion: View {
                         .padding()
                         .offset(y: -25)
                 } else {
-                    Text("Edit Question")
+                    Text("Edit Answer")
                         .frame(height: 50)
                         .frame(maxWidth: .infinity)
                         .background(Color.red)
@@ -55,8 +55,3 @@ struct DisplayQuestion: View {
     }
 }
 
-struct DisplayQuestion_Previews: PreviewProvider {
-    static var previews: some View {
-        DisplayQuestion()
-    }
-}

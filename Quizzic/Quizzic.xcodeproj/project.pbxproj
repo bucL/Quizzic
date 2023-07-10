@@ -34,7 +34,6 @@
 		68D255EA29BBDE14003A306A /* QuizzicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D255E929BBDE14003A306A /* QuizzicUITests.swift */; };
 		68D255EC29BBDE14003A306A /* QuizzicUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D255EB29BBDE14003A306A /* QuizzicUITestsLaunchTests.swift */; };
 		68EC51732A2952EE00B94C40 /* DisplayQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EC51722A2952EE00B94C40 /* DisplayQuestion.swift */; };
-		68EC51752A29586F00B94C40 /* QuestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EC51742A29586F00B94C40 /* QuestionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +78,6 @@
 		68D255E929BBDE14003A306A /* QuizzicUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzicUITests.swift; sourceTree = "<group>"; };
 		68D255EB29BBDE14003A306A /* QuizzicUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizzicUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		68EC51722A2952EE00B94C40 /* DisplayQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayQuestion.swift; sourceTree = "<group>"; };
-		68EC51742A29586F00B94C40 /* QuestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuestionManager.swift; path = Quizzic/Views/QuestionManager.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +141,6 @@
 				68BC69AD2A1DA2050062E4A1 /* QuizzesView.swift */,
 				68BC69AF2A1DCCD20062E4A1 /* TakeQuiz.swift */,
 				68EC51722A2952EE00B94C40 /* DisplayQuestion.swift */,
-				68EC51742A29586F00B94C40 /* QuestionManager.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -353,7 +350,6 @@
 				687913162A0907CC00B64840 /* SignUpView.swift in Sources */,
 				687913182A0908F200B64840 /* AuthView.swift in Sources */,
 				68BC69AC2A1D7FD20062E4A1 /* QuestionMaker.swift in Sources */,
-				68EC51752A29586F00B94C40 /* QuestionManager.swift in Sources */,
 				68BC69AE2A1DA2050062E4A1 /* QuizzesView.swift in Sources */,
 				6879131A2A090A6100B64840 /* ContentView.swift in Sources */,
 				6870054E2A0C809800448316 /* SettingsView.swift in Sources */,

@@ -34,7 +34,6 @@ struct QuizzesView: View {
                 ScrollView{
                     LazyVGrid (columns: createGrid()){
                         ForEach(quizzesArray, id:\.self) { quiz in
-                            // doesn't acutally navigate to the new view.
                             Button {
                                 getQuizInfo(quizName: "\(quiz)")
                                 nameOfCurrentQuiz = quiz

@@ -16,7 +16,7 @@
 * as this can be some of the more convoluted code in your program
 *
 * Likewise, you have a large number of state variables which are 
-* being tracked in your program. However, you are not linking
+* being tracked in your program. However, you ´are not linking
 * to a controller so that these can be acted upon by
 * collected external logic. Your program would benefit form 
 * having this logic separated out and the same with 
@@ -24,6 +24,7 @@
 * using the FILESYSTEM object and class.
 */
 import SwiftUI
+import Firebase
 import FirebaseFirestore
 
 
@@ -84,7 +85,7 @@ struct QuizCreator: View {
 
                 
                 Button {
-                    if questions == [:] {
+                    if questions == [:] || quizName == ""{
                         showAlert = true
                     } else {
                         let docData = questions
@@ -105,7 +106,7 @@ struct QuizCreator: View {
                     
                 } label: {
                     Text("Save Quiz")
-                        .alert("Please create a question before trying to save the quiz", isPresented: $showAlert) {
+                        .alert("Please create a Question and enter a Quiz Name before trying to save the quiz", isPresented: $showAlert) {
                             Button("Okay!", role: .cancel) {}
                         }
                         .alert("Successfully created a new quiz", isPresented: $successAlert) {

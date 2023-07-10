@@ -34,16 +34,14 @@ struct TakeQuiz: View {
             ScrollView{
                 VStack{
                     
-                    ForEach(actualQuestions, id:\.self) { actualQuestion in
+                    ForEach(0...actualQuestions.count-1, id:\.self) { index in
+                        
                         VStack{
-                            Text("\(actualQuestion)")
-                                
-                            // Need to do something similar to the QuestionMaker in order to fix the multiple textboes being the same.
-                            DisplayQuestion()
-                            
-                        }
-                        .onAppear {
-                            QuestionManager.shared.actualQuestion = actualQuestion
+                            Text("\(actualQuestions[index])")
+                                .font(.headline)
+                                .padding()
+                            DisplayQuestion(questionNumber: index)
+                                .padding()
                         }
                     }
                     
@@ -57,7 +55,8 @@ struct TakeQuiz: View {
         Button {
             print(userAnswers)
         } label: {
-            Text("submit quiz")
+            Text("Submit Quiz")
+                .padding()
         }
         
     }
