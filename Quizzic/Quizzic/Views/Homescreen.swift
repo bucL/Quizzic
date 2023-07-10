@@ -57,25 +57,13 @@ struct Homescreen: View {
                     
                     Spacer()
                 }
-                
-                
-                
-                
             }
             .navigationBarHidden(true)
         }
-        
     }
-    
-    
-    
-    
-    
-    
 }
 struct Homescreen_Previews: PreviewProvider {
     static var previews: some View {
         Homescreen()
-        
     }
 }

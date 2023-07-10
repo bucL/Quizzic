@@ -16,6 +16,7 @@ struct SignUpView: View {
     @AppStorage("uid") var userID: String  = ""
     @AppStorage("username") var username: String = ""
     @State private var email: String = ""
+    @State var incorrectPassword = false
     @State private var password: String = ""
     @State private var newusername: String = ""
     
@@ -130,7 +131,8 @@ struct SignUpView: View {
                 Spacer()
                 
                 Button {
-                    Auth.auth().createUser(withEmail: email, password: password) {authResult, error in
+                    if isValidPassword(password) == true {
+                        Auth.auth().createUser(withEmail: email, password: password) {authResult, error in
                         if let error = error {
                             print(error)
                             return
@@ -155,6 +157,10 @@ struct SignUpView: View {
                             username = newusername
                         }
                     }
+                    } else {
+                        incorrectPassword = true
+                    }
+
                     
                 } label: {
                     Text("Create Account")
@@ -173,6 +179,13 @@ struct SignUpView: View {
                 
                 
             }
-        }
+        }.alert(isPresented: $incorrectPassword, content: {
+            Alert(
+                title: Text("Uh Oh"),
+                message: Text("Please make sure the password you have entered has at least 1 uppercase character, lowercase character, number and symbol and is 10 characters long"),
+                dismissButton: .default(Text("Okay"))
+            
+            )
+        })
     }
 }
