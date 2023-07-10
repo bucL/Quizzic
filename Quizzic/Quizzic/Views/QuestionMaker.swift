@@ -30,6 +30,7 @@ struct QuestionMaker: View {
                 .disabled(!isEditable)
                 .padding()
                 .frame(height:50)
+                .autocapitalization(.none)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(lineWidth: 2)
@@ -41,10 +42,10 @@ struct QuestionMaker: View {
         }
         .padding()
         Button {
-            // Bug when attempting to edit questions it adds another key-value pair instead of properly changing the previous question.
+
             if isEditable == true {
                 isEditable = false
-                questions["\(tempQuestion)"] = "\(tempAnswer)"
+                questions["\(tempQuestion)"] = "\(tempAnswer.lowercased())"
                 print(questions)
             } else {
                 questions.removeValue(forKey: tempQuestion)
@@ -74,7 +75,6 @@ struct QuestionMaker: View {
                     .offset(y: -25)
             }
         }
-        
         Spacer()
     }
 }

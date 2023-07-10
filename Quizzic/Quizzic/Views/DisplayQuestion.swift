@@ -19,10 +19,16 @@ struct DisplayQuestion: View {
                 .disabled(!isEditable)
                 .autocorrectionDisabled()
                 .autocapitalization(.none)
+                .padding() // Add padding to the text field
+                .background(Color.gray.opacity(0.2)) // Set the background color
+                .cornerRadius(8) // Add corner radius to the text field
+                .padding(.horizontal) // Add horizontal padding
+                .textFieldStyle(RoundedBorderTextFieldStyle()) // Apply a rounded border style
+                .frame(maxWidth:.infinity)
             Button {
                 if isEditable == true {
                     isEditable = false
-                    userAnswers[actualQuestions[questionNumber]] = tempUserAnswer
+                    userAnswers[actualQuestions[questionNumber]] = tempUserAnswer.lowercased()
                     print(userAnswers)
                 } else {
                     isEditable = true
