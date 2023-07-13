@@ -6,23 +6,23 @@
 //
 
 /*
-* REMARK: @bucL
-* You are not separating your program into sub-views
-* it is important that you separate out frequently used
-* blocks of view logic, and connect it with bindings.
-*
-* You also do not have any commenting in this code
-* you should make sure that you comment even your view logic
-* as this can be some of the more convoluted code in your program
-*
-* Likewise, you have a large number of state variables which are 
-* being tracked in your program. However, you ´are not linking
-* to a controller so that these can be acted upon by
-* collected external logic. Your program would benefit form 
-* having this logic separated out and the same with 
-* models of your data. This way you can write them to disk
-* using the FILESYSTEM object and class.
-*/
+ * REMARK: @bucL
+ * You are not separating your program into sub-views
+ * it is important that you separate out frequently used
+ * blocks of view logic, and connect it with bindings.
+ *
+ * You also do not have any commenting in this code
+ * you should make sure that you comment even your view logic
+ * as this can be some of the more convoluted code in your program
+ *
+ * Likewise, you have a large number of state variables which are
+ * being tracked in your program. However, you ´are not linking
+ * to a controller so that these can be acted upon by
+ * collected external logic. Your program would benefit form
+ * having this logic separated out and the same with
+ * models of your data. This way you can write them to disk
+ * using the FILESYSTEM object and class.
+ */
 import SwiftUI
 import Firebase
 import FirebaseFirestore
@@ -38,6 +38,7 @@ struct QuizCreator: View {
     @State private var quizName: String = ""
     @State private var showAlert = false
     @State private var successAlert = false
+    @State private var errorAlert = false
     
     var body: some View {
         ScrollView {
@@ -49,17 +50,24 @@ struct QuizCreator: View {
                     .padding()
                 
                 // Text field for entering the quiz name
-                TextField("Quiz Name", text: $quizName)
-                    .bold()
-                    .font(.title)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(lineWidth: 2)
-                            .foregroundColor(Color.gray.opacity(0.5))
-                    )
-                    .padding()
+                HStack {
+                    TextField("Quiz Name", text: $quizName)
+                        .bold()
+                        .font(.title)
+                    if quizName.count != 0 {
+                        Image(systemName: checkQuizExists(searchString: quizName, array: quizzesArray) ? "xmark" : "checkmark")
+                            .fontWeight(.bold)
+                            .foregroundColor(checkQuizExists(searchString: quizName, array: quizzesArray) ?  .red : .green)
+                    }
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(lineWidth: 2)
+                        .foregroundColor(Color.gray.opacity(0.5))
+                )
+                .padding()
                 
                 // Information about adding questions to the quiz
                 Text("If you add or remove questions while creating the Quiz Please click 'Edit Question' and then 'Save Question' again to ensure your questions are saved.")
@@ -106,6 +114,8 @@ struct QuizCreator: View {
                     // Check if the questions dictionary is empty or if the quiz name is empty
                     if questions == [:] || quizName == "" {
                         showAlert = true // Set showAlert to true if either condition is true
+                    } else if checkQuizExists(searchString: quizName, array: quizzesArray) == true {
+                        errorAlert = true
                     } else {
                         let docData = questions
                         let db = Firestore.firestore()
@@ -121,6 +131,7 @@ struct QuizCreator: View {
                         
                         successAlert = true
                         numberOfQuestions = 0
+                        quizName = ""
                     }
                 } label: {
                     Text("Save Quiz")
@@ -130,6 +141,14 @@ struct QuizCreator: View {
                         .alert("Successfully created a new quiz", isPresented: $successAlert) {
                             Button("Okay!", role: .cancel) {}
                         }
+                        .alert(isPresented: $errorAlert, content: {
+                            Alert(
+                                title: Text("Uh Oh!"),
+                                message: Text("Make sure the quiz you are trying to create doesn't already exist."),
+                                dismissButton: .default(Text("Okay"))
+                                
+                            )
+                        })
                         .frame(height: 50)
                         .frame(maxWidth: .infinity)
                         .background(Color.green) // Green background color

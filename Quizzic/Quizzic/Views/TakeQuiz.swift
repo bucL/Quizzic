@@ -12,6 +12,7 @@ struct TakeQuiz: View {
     @State var showAlert = false
     @State var result = ""
     
+    
     var body: some View {
         if completedQuiz == false {
             VStack {
@@ -64,33 +65,45 @@ struct TakeQuiz: View {
                 }
                 Spacer()
             }
+            .navigationBarHidden(true)
             .alert("Please make sure you have saved all your answers before submitting the quiz", isPresented: $showAlert) {
                 Button("Okay!", role: .cancel) {}
             }
-        } else {
-            VStack {
-                Text("Congratulations!")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.green)
-                    .cornerRadius(10)
-                
-                Text("You have completed the quiz \(nameOfCurrentQuiz).")
-                    .font(.headline)
-                    .padding()
-                Text(result)
-                    .font(.headline)
-                    .padding()
-                Text("Click the back button to choose a new quiz to take.")
-                    .font(.subheadline)
-                    .padding()
-                Spacer()
+        }
+        else {
+            NavigationView {
+                VStack {
+                    Text("Congratulations!")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.green)
+                        .cornerRadius(10)
+                    
+                    Text("You have completed the quiz \(nameOfCurrentQuiz).")
+                        .font(.headline)
+                        .padding()
+                    Text(result)
+                        .font(.headline)
+                        .padding()
+                    Text("Click the back button to go back to the homescreen.")
+                        .font(.subheadline)
+                        .padding()
+                    Spacer()
+                    NavigationLink(destination: Homescreen(), label: {
+                        Text("Go Back")
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 4).foregroundColor(.green))
+                    })
+                    
+                    
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding()
+                .background(Color.gray.opacity(0.2))
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding()
-            .background(Color.gray.opacity(0.2))
+            .navigationBarHidden(true)
         }
         
     }

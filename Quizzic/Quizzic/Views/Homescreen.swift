@@ -46,20 +46,14 @@ struct Homescreen: View {
                             }
                             .offset(x: 75)
                             .padding()
-
-                            
                         }
-                                                
                         Spacer()
-                        
-                        
                     }
-                    
                     Spacer()
                 }
             }
-            .navigationBarHidden(true)
         }
+        .navigationBarHidden(true)
     }
 }
 struct Homescreen_Previews: PreviewProvider {

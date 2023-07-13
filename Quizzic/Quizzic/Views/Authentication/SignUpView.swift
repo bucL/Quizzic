@@ -49,7 +49,7 @@ struct SignUpView: View {
                     Image(systemName: "mail")
                     TextField("Email", text:$email)
                         .autocapitalization(.none)
-                    
+                        .autocorrectionDisabled(true)
                     
                     Spacer()
                     
@@ -57,11 +57,8 @@ struct SignUpView: View {
                         Image(systemName: email.isValidEmail() ? "checkmark" : "xmark")
                             .fontWeight(.bold)
                             .foregroundColor(email.isValidEmail() ? .green : .red)
-
+                        
                     }
-                    
-                    
-                    
                 }
                 .foregroundColor(.white)
                 .padding()
@@ -70,22 +67,18 @@ struct SignUpView: View {
                         .stroke(lineWidth: 2)
                         .foregroundColor(.white)
                 )
-                
                 .padding()
-                
                 HStack {
                     Image(systemName: "lock")
                     SecureField("Password", text:$password)
                         .autocapitalization(.none)
-                    
+                        .autocorrectionDisabled(true)
                     Spacer()
-                    
                     if password.count != 0 {
-                    
+                        
                         Image(systemName: isValidPassword(password) ? "checkmark" : "xmark")
                             .fontWeight(.bold)
                             .foregroundColor(isValidPassword(password) ?  .green : .red)
-                       
                     }
                     
                 }
@@ -102,6 +95,8 @@ struct SignUpView: View {
                 HStack {
                     Image(systemName: "person")
                     TextField("Username", text:$newusername)
+                        .autocapitalization(.none)
+                        .autocorrectionDisabled()
                     
                     Spacer()
                     
@@ -133,41 +128,36 @@ struct SignUpView: View {
                 Button {
                     if isValidPassword(password) == true {
                         Auth.auth().createUser(withEmail: email, password: password) {authResult, error in
-                        if let error = error {
-                            print(error)
-                            return
-                        }
-                        if let authResult = authResult {
-                            print(authResult.user.uid)
-                            userID = authResult.user.uid
-                            let db = Firestore.firestore()
-                            
-                            db.collection("users").document("\(userID)").setData([
-                                "email": "\(email)",
-                                "username": "\(newusername)"
-                            ]) { err in
-                                if let err = err {
-                                    print("Error writing document: \(err)")
-                                } else {
-                                    print("Document successfully written!")
-                                }
+                            if let error = error {
+                                print(error)
+                                return
                             }
-                            
-                            
-                            username = newusername
+                            if let authResult = authResult {
+                                print(authResult.user.uid)
+                                userID = authResult.user.uid
+                                let db = Firestore.firestore()
+                                
+                                db.collection("users").document("\(userID)").setData([
+                                    "email": "\(email)",
+                                    "username": "\(newusername)"
+                                ]) { err in
+                                    if let err = err {
+                                        print("Error writing document: \(err)")
+                                    } else {
+                                        print("Document successfully written!")
+                                    }
+                                }
+                                username = newusername
+                            }
                         }
-                    }
                     } else {
                         incorrectPassword = true
                     }
-
-                    
                 } label: {
                     Text("Create Account")
                         .foregroundColor(.black)
                         .font(.title3)
                         .bold()
-                    
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background (
@@ -176,15 +166,13 @@ struct SignUpView: View {
                         )
                         .padding(.horizontal)
                 }
-                
-                
             }
         }.alert(isPresented: $incorrectPassword, content: {
             Alert(
                 title: Text("Uh Oh"),
                 message: Text("Please make sure the password you have entered has at least 1 uppercase character, lowercase character, number and symbol and is 10 characters long"),
                 dismissButton: .default(Text("Okay"))
-            
+                
             )
         })
     }

@@ -13,11 +13,11 @@ import SwiftUI
 
 
 /**
-Retrieves the names of quizzes from Firestore and populates the `quizzesArray`.
+ Retrieves the names of quizzes from Firestore and populates the `quizzesArray`.
  - Parameter NONE
  - Returns: NONE
-            (Modifies quizzesArray 
-            in a global state)
+ (Modifies quizzesArray
+ in a global state)
  */
 
 func getQuizNames() {
@@ -50,10 +50,14 @@ func getQuizNames() {
 
 
 
-// Creates GridItems for the LazyVGrid in QuizzesView.swift
+/// Creates an array of GridItems for use in a SwiftUI grid view.
+/// The grid layout consists of flexible-sized items with a fixed spacing between them.
+/// - Parameters:
+///     - NONE
+/// - Returns: An array of GridItems with a flexible size and a fixed spacing.
 func createGrid() -> [GridItem] {
-    let gridItem = GridItem(.flexible(), spacing: 10)
-    return Array(repeating: gridItem, count: 3)
+    let gridItem = GridItem(.flexible(), spacing: 10)  // Create a single GridItem with flexible size and spacing of 10
+    return Array(repeating: gridItem, count: 3)        // Return an array of GridItems, repeating the single GridItem 3 times
 }
 
 /// Retrieves quiz information from Firestore based on the provided quiz name.
@@ -90,15 +94,15 @@ func getQuizInfo(quizName: String) {
 
 
 /**
-    Compares two dictionaries and returns a string indicating the number of correct matches.
-
-    - Parameters:
-        - quiz: The original quiz dictionary which stores the questions and answers as key-value pairs that were defined at the time of its creation.
-        - userInput: The user's answers matched with the question they answered as key-value pairs. The keys are identical with "quiz".
-
-    - Returns:
-        A string indicating the number of correct matches out of the total number of questions.
-*/
+ Compares two dictionaries and returns a string indicating the number of correct matches.
+ 
+ - Parameters:
+ - quiz: The original quiz dictionary which stores the questions and answers as key-value pairs that were defined at the time of its creation.
+ - userInput: The user's answers matched with the question they answered as key-value pairs. The keys are identical with "quiz".
+ 
+ - Returns:
+ A string indicating the number of correct matches out of the total number of questions.
+ */
 func markQuiz(quiz: [String: String], userInput: [String: String]) -> String {
     var correctCount = 0 // Variable to keep track of the number of correct matches
     
@@ -110,7 +114,39 @@ func markQuiz(quiz: [String: String], userInput: [String: String]) -> String {
         }
     }
     let totalCount = quiz.count // Total number of key-value pairs in the dictionaries
-    let resultString = "Congratulations, you got \(correctCount) out of \(totalCount) questions correct."
+    let resultString = "You got \(correctCount) out of \(totalCount) questions correct."
     
     return resultString // Return the resulting string
+}
+
+/// Searches an array of quizzes for the specified quizname and returns an array with all the quizzes that contain the specific searchterm.
+/// of strings containing the elements where the search term is found.
+/// - Parameters:
+///   - searchTerm: The search term to look for within the array of quizNames.
+///   - array: The array of quizNames to be searched.
+/// - Returns: An array of strings containing the elements where the search term is found.
+func searchArray(searchTerm: String, array: [String]) -> [String] {
+    var foundElements: [String] = []   // Array to store the found elements
+    
+    for element in array {
+        if element.lowercased().contains(searchTerm) {
+            foundElements.append(element)   // Append the element to the foundElements array
+        }
+    }
+    
+    return foundElements   // Return the array of found elements
+}
+
+/// Checks if a quiz exists in an array of strings.
+/// - Parameters:
+///   - searchString: The quizname to check for.
+///   - array: The array of quizzes to search in.
+/// - Returns: A Boolean value indicating whether the quiz exists in the array of quiz names. .
+func checkQuizExists(searchString: String, array: [String]) -> Bool {
+    for element in array {
+        if element == searchString {
+            return true   // The quiz exists
+        }
+    }
+    return false   // The quiz does not exist
 }
