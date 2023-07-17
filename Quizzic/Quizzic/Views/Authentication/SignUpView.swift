@@ -47,7 +47,7 @@ struct SignUpView: View {
                 
                 HStack {
                     Image(systemName: "mail")
-                    TextField("Email", text:$email)
+                    TextField("Email", text: self.$email.max(100))
                         .autocapitalization(.none)
                         .autocorrectionDisabled(true)
                     
@@ -70,7 +70,7 @@ struct SignUpView: View {
                 .padding()
                 HStack {
                     Image(systemName: "lock")
-                    SecureField("Password", text:$password)
+                    SecureField("Password", text: self.$password.max(35))
                         .autocapitalization(.none)
                         .autocorrectionDisabled(true)
                     Spacer()
@@ -94,7 +94,7 @@ struct SignUpView: View {
                 
                 HStack {
                     Image(systemName: "person")
-                    TextField("Username", text:$newusername)
+                    TextField("Username", text:self.$newusername.max(40))
                         .autocapitalization(.none)
                         .autocorrectionDisabled()
                     
@@ -170,7 +170,7 @@ struct SignUpView: View {
         }.alert(isPresented: $incorrectPassword, content: {
             Alert(
                 title: Text("Uh Oh"),
-                message: Text("Please make sure the password you have entered has at least 1 uppercase character, lowercase character, number and symbol and is 10 characters long"),
+                message: Text("Please make sure the password you entered is a minimum of 6 characters long and has at least 1 uppercase character and 1 symbol"),
                 dismissButton: .default(Text("Okay"))
                 
             )

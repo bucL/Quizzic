@@ -5,24 +5,6 @@
 //  Created by Aaditya Shankar on 19/5/2023.
 //
 
-/*
- * REMARK: @bucL
- * You are not separating your program into sub-views
- * it is important that you separate out frequently used
- * blocks of view logic, and connect it with bindings.
- *
- * You also do not have any commenting in this code
- * you should make sure that you comment even your view logic
- * as this can be some of the more convoluted code in your program
- *
- * Likewise, you have a large number of state variables which are
- * being tracked in your program. However, you ´are not linking
- * to a controller so that these can be acted upon by
- * collected external logic. Your program would benefit form
- * having this logic separated out and the same with
- * models of your data. This way you can write them to disk
- * using the FILESYSTEM object and class.
- */
 import SwiftUI
 import Firebase
 import FirebaseFirestore
@@ -51,7 +33,7 @@ struct QuizCreator: View {
                 
                 // Text field for entering the quiz name
                 HStack {
-                    TextField("Quiz Name", text: $quizName)
+                    TextField("Quiz Name", text: self.$quizName.max(100))
                         .bold()
                         .font(.title)
                     if quizName.count != 0 {

@@ -28,23 +28,19 @@ struct LogInView: View {
     var body: some View {
         ZStack {
             Color.white.edgesIgnoringSafeArea(.all)
-            
             VStack {
                 HStack{
                     Text("Welcome Back")
                         .font(.largeTitle)
                         .bold()
-                    
                     Spacer()
                 }
                 .padding()
                 .padding(.top)
-                
                 Spacer()
-                
                 HStack {
                     Image(systemName: "mail")
-                    TextField("Email", text:$email)
+                    TextField("Email", text:self.$email.max(100))
                         .autocapitalization(.none)
                     
                     Spacer()
@@ -53,11 +49,7 @@ struct LogInView: View {
                         Image(systemName: email.isValidEmail() ? "checkmark" : "xmark")
                             .fontWeight(.bold)
                             .foregroundColor(email.isValidEmail() ? .green : .red)
-                        
                     }
-                    
-                    
-                    
                 }
                 .padding()
                 .overlay(
@@ -65,24 +57,18 @@ struct LogInView: View {
                         .stroke(lineWidth: 2)
                         .foregroundColor(.black)
                 )
-                
                 .padding()
-                
                 HStack {
                     Image(systemName: "lock")
                     SecureField("Password", text:$password)
                         .autocapitalization(.none)
-                    
                     Spacer()
-                    
                     if password.count != 0 {
                         
                         Image(systemName: isValidPassword(password) ? "checkmark" : "xmark")
                             .fontWeight(.bold)
                             .foregroundColor(isValidPassword(password) ?  .green : .red)
-                        
                     }
-                    
                 }
                 .padding()
                 .overlay(
@@ -90,24 +76,17 @@ struct LogInView: View {
                         .stroke(lineWidth: 2)
                         .foregroundColor(.black)
                 )
-                
                 .padding()
-                
                 Button(action: {
-                    
                     withAnimation() {
                         self.currentView = "signup"
                     }
-                    
                 }) {
                     Text("Don't have an account?")
                         .foregroundColor(.black.opacity(0.7))
                 }
-                
                 Spacer()
                 Spacer()
-                
-                
                 Button {
                     Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                         if let error = error {

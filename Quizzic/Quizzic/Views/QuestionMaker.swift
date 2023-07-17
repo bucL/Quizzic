@@ -16,7 +16,7 @@ struct QuestionMaker: View {
     @State private var isEditable = true
     var body: some View {
         VStack {
-            TextField("Question...", text:$tempQuestion)
+            TextField("Question...", text: self.$tempQuestion.max(250))
                 .disabled(!isEditable)
                 .padding()
                 .frame(height: 50)
@@ -26,7 +26,7 @@ struct QuestionMaker: View {
                         .foregroundColor(Color.black)
                 )
 
-            TextField("Answer...", text:$tempAnswer)
+            TextField("Answer...", text: self.$tempAnswer.max(250))
                 .disabled(!isEditable)
                 .padding()
                 .frame(height:50)

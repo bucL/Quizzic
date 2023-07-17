@@ -17,8 +17,11 @@ struct SearchView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                TextField("Enter Quiz Name...", text: $searchString)
+            Text("Search for a Quiz")
+                .font(.title)
+                .padding()
+                HStack {
+                    TextField("Enter Quiz Name...", text: self.$searchString.max(100))
                     .autocapitalization(.none)
                     .autocorrectionDisabled(true)
                     .frame(height: 25)
@@ -47,7 +50,22 @@ struct SearchView: View {
             }
             Spacer()
             ScrollView {
-                
+                LazyVGrid (columns: createGrid()){
+                    ForEach(searchResult, id:\.self) { quiz in
+                        Button {
+                            nameOfCurrentQuiz = quiz
+                            getQuizInfo(quizName: "\(quiz)")
+                            DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
+                            }
+                        } label: {
+                            Text("\(quiz)")
+                                .frame(width: 100, height: 100)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                    }
+                }
             }
         }
         

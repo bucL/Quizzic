@@ -7,29 +7,25 @@
 
 import SwiftUI
 struct TakeQuiz: View {
-    
-    @State private var completedQuiz = false
-    @State var showAlert = false
-    @State var result = ""
-    
+    @State private var completedQuiz = false  // State variable to track if the quiz is completed
+    @State var showAlert = false  // State variable to show an alert
+    @State var result = ""  // State variable to store the result
     
     var body: some View {
-        if completedQuiz == false {
+        if completedQuiz == false {  // Check if the quiz is not completed
             VStack {
-                
-                Text("\(nameOfCurrentQuiz)")
+                Text("\(nameOfCurrentQuiz)")  // Display the name of the current quiz
                     .font(.title2)
                     .padding()
-                Text("Please remember to click the save button after answering each question")
+                Text("Please remember to click the save button after answering each question")  // Reminder message
                     .padding()
                 Spacer()
                 
                 ScrollView{
                     VStack{
-                        
                         ForEach(0...actualQuestions.count-1, id:\.self) { index in
                             VStack{
-                                Text("\(actualQuestions[index])")
+                                Text("\(actualQuestions[index])")  // Display the question
                                     .font(.headline)
                                     .fontWeight(.bold) // Set the font weight
                                     .foregroundColor(.white) // Set the text color
@@ -39,24 +35,24 @@ struct TakeQuiz: View {
                                     .cornerRadius(10) // Add corner radius to the text view
                                     .shadow(color: .gray, radius: 5, x: 0, y: 2) // Add a shadow to the text view
                                     .frame(maxWidth:.infinity)
-                                DisplayQuestion(questionNumber: index)
+                                DisplayQuestion(questionNumber: index)  // Display the question and answer options
                                     .padding()
                             }
+                            .padding()
                         }
                     }
-                    
                 }
                 Spacer()
                 Button(action: {
                     if userAnswers.count != actualQuestions.count {
-                        showAlert = true
+                        showAlert = true  // Show an alert if not all questions are answered
                     } else{
-                        result = markQuiz(quiz: questions, userInput: userAnswers)
-                        completedQuiz = true
+                        result = markQuiz(quiz: questions, userInput: userAnswers)  // Call the markQuiz funciton and calculate the users score.
+                        completedQuiz = true  // Set the quiz as completed to update the view.
                     }
                     
                 }) {
-                    Text("Submit")
+                    Text("Submit")  // Button to submit the quiz
                         .font(.headline)
                         .foregroundColor(.white) // Set the text color to white
                         .padding() // Add padding to the button
@@ -73,7 +69,7 @@ struct TakeQuiz: View {
         else {
             NavigationView {
                 VStack {
-                    Text("Congratulations!")
+                    Text("Congratulations!")  // Display a congratulatory message
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .padding()
@@ -81,18 +77,15 @@ struct TakeQuiz: View {
                         .background(Color.green)
                         .cornerRadius(10)
                     
-                    Text("You have completed the quiz \(nameOfCurrentQuiz).")
+                    Text("You have completed the quiz \(nameOfCurrentQuiz).")  // Display completion message
                         .font(.headline)
                         .padding()
-                    Text(result)
+                    Text(result)  // Display the result
                         .font(.headline)
-                        .padding()
-                    Text("Click the back button to go back to the homescreen.")
-                        .font(.subheadline)
                         .padding()
                     Spacer()
                     NavigationLink(destination: Homescreen(), label: {
-                        Text("Go Back")
+                        Text("Go Back")  // Navigation link to go back to the homescreen
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 4).foregroundColor(.green))
                     })
@@ -108,6 +101,7 @@ struct TakeQuiz: View {
         
     }
 }
+
 struct TakeQuiz_Previews: PreviewProvider {
     static var previews: some View {
         TakeQuiz()

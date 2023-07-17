@@ -20,20 +20,15 @@ import FirebaseFirestore
 *
 */
 
-var view: String?
-
 @main
 struct QuizzicApp: App {
-
-    
     init() {
-        FirebaseApp.configure()     //Firebase initialised
-        
+        /// Initialising the Firebase API to facilitate the use of firebase functions such as firestore and auth which allow for the storing of quizzes on a database online and user management through firebase.
+        FirebaseApp.configure()
     }
-    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView()   // Set the start point of the Application to the Content View
         }
     }
 }

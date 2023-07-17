@@ -1,5 +1,5 @@
 //
-//  Question.swift
+//  Functions.swift
 //  Quizzic
 //
 //  Created by Aaditya Shankar on 24/5/2023.
@@ -10,8 +10,6 @@ import Firebase
 import FirebaseFirestore
 import SwiftUI
 
-
-
 /**
  Retrieves the names of quizzes from Firestore and populates the `quizzesArray`.
  - Parameter NONE
@@ -19,25 +17,20 @@ import SwiftUI
  (Modifies quizzesArray
  in a global state)
  */
-
 func getQuizNames() {
     let db = Firestore.firestore()
     let collectionReference = db.collection("quizzes")
-    
     quizzesArray = []   // Clear the quizzesArray
-    
     // Retrieve the documents from the "quizzes" collection in Firestore
     collectionReference.getDocuments { (snapshot, error) in
         if let error = error {
             print("Error getting documents: \(error)")   // Print an error message if there's an error
             return
         }
-        
         guard let documents = snapshot?.documents else {
             print("No quizzes exist")   // Print a message if no documents exist
             return
         }
-        
         // Loop through the retrieved documents
         for document in documents {
             let documentName = document.documentID
@@ -150,3 +143,24 @@ func checkQuizExists(searchString: String, array: [String]) -> Bool {
     }
     return false   // The quiz does not exist
 }
+
+
+/// Setting a maxlength for a textfield solution acquired from https://stackoverflow.com/a/68167518
+extension Binding where Value == String {
+    /// Limits the maximum number of characters that can be entered into a `TextField`.
+    /// If the current string value exceeds the specified limit, the extra characters are automatically removed.
+    /// - Parameters:
+    ///    - limit: The maximum character limit.
+    /// - Returns: The modified `Binding` with the maximum character limit applied.
+    func max(_ limit: Int) -> Self {
+        // Check if the current string length exceeds the specified limit
+        if self.wrappedValue.count > limit {
+            // Asynchronously update the string value to remove the extra characters
+            DispatchQueue.main.async {
+                self.wrappedValue = String(self.wrappedValue.dropLast())
+            }
+        }
+        return self
+    }
+}
+
