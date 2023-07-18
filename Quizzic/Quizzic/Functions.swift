@@ -164,3 +164,23 @@ extension Binding where Value == String {
     }
 }
 
+/**
+    A  helper function to check if a password matches the specified criteria.
+     
+    - Parameters:
+        - password: The password string to be validated.
+     
+    - Returns:
+        A Boolean value indicating whether the password is valid or not. `true` if the password meets the criteria, otherwise `false`.
+*/
+func isValidPassword(_ password: String) -> Bool {
+    // Regular expression to validate the password format:
+    // - Minimum 6 characters
+    // - At least 1 lowercase letter
+    // - At least 1 uppercase letter
+    // - At least 1 special character (e.g., $, @, #, !, %, *, ?, &)
+    let passwordRegex = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{6,}$")
+    
+    // Evaluate the password against the regular expression and return the result.
+    return passwordRegex.evaluate(with: password)
+}

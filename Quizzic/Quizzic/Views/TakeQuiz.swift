@@ -10,6 +10,7 @@ struct TakeQuiz: View {
     @State private var completedQuiz = false  // State variable to track if the quiz is completed
     @State var showAlert = false  // State variable to show an alert
     @State var result = ""  // State variable to store the result
+    @State var navigateFromSearch = false // Determines whether the view should navigate back to the home screen or the search view.
     
     var body: some View {
         if completedQuiz == false {  // Check if the quiz is not completed
@@ -62,6 +63,7 @@ struct TakeQuiz: View {
                 Spacer()
             }
             .navigationBarHidden(true)
+            // Present an alert if the user has not saved all answers.
             .alert("Please make sure you have saved all your answers before submitting the quiz", isPresented: $showAlert) {
                 Button("Okay!", role: .cancel) {}
             }
@@ -69,28 +71,41 @@ struct TakeQuiz: View {
         else {
             NavigationView {
                 VStack {
-                    Text("Congratulations!")  // Display a congratulatory message
+                    // Display a congratulatory message
+                    Text("Congratulations!")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .padding()
                         .foregroundColor(.white)
                         .background(Color.green)
                         .cornerRadius(10)
-                    
-                    Text("You have completed the quiz \(nameOfCurrentQuiz).")  // Display completion message
+
+                    // Display the completion message with the quiz name
+                    Text("You have completed the quiz \(nameOfCurrentQuiz).")
                         .font(.headline)
                         .padding()
-                    Text(result)  // Display the result
+
+                    // Display the result of the quiz
+                    Text(result)
                         .font(.headline)
                         .padding()
+
                     Spacer()
-                    NavigationLink(destination: Homescreen(), label: {
-                        Text("Go Back")  // Navigation link to go back to the homescreen
-                            .padding()
-                            .background(RoundedRectangle(cornerRadius: 4).foregroundColor(.green))
-                    })
-                    
-                    
+
+                    // Navigation link to go back to the previous view (either SearchView or Homescreen) based on the value of `navigateFromSearch`
+                    if navigateFromSearch == true {
+                        NavigationLink(destination: SearchView(), label: {
+                            Text("Go Back")
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 4).foregroundColor(.green))
+                        })
+                    } else {
+                        NavigationLink(destination: Homescreen(), label: {
+                            Text("Go Back")
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 4).foregroundColor(.green))
+                        })
+                    }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding()
