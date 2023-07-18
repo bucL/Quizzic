@@ -5,40 +5,29 @@
 //  Created by Aaditya Shankar on 19/5/2023.
 //
 
-/*
-* REMARK: @bucL
-* You are not separating your program into sub-views
-* it is important that you separate out frequently used
-* blocks of view logic, and connect it with bindings.
-*
-* You also do not have any commenting in this code
-* you should make sure that you comment even your view logic
-* as this can be some of the more convoluted code in your program
-*
-* Likewise, you have a large number of state variables which are 
-* being tracked in your program. However, you ´are not linking
-* to a controller so that these can be acted upon by
-* collected external logic. Your program would benefit form 
-* having this logic separated out and the same with 
-* models of your data. This way you can write them to disk
-* using the FILESYSTEM object and class.
-*/
 import SwiftUI
 import Firebase
 import FirebaseFirestore
 
 
+/**
+ A SwiftUI view for creating a quiz.
+ This view allows the user to create a new quiz by specifying the quiz name and the number of questions, and then adding and editing the questions for the quiz.
+ */
 struct QuizCreator: View {
-    // AppStorage properties to store user ID and username through restarts
+    // AppStorage variable that stores the current user's uid across restarts of the application to ensure they stay logged in
     @AppStorage("uid") var userID: String = ""
+
+    // AppStorage variable that stores the current user's uid across restarts of the application to ensure they stay logged in
     @AppStorage("username") var username: String = ""
-    
+
     // State properties for quiz creation
     @State private var numberOfQuestions: Float = 0
     @State private var quizName: String = ""
     @State private var showAlert = false
     @State private var successAlert = false
-    
+    @State private var errorAlert = false
+
     var body: some View {
         ScrollView {
             VStack {
@@ -47,24 +36,32 @@ struct QuizCreator: View {
                     .font(.largeTitle)
                     .bold()
                     .padding()
-                
+
                 // Text field for entering the quiz name
-                TextField("Quiz Name", text: $quizName)
-                    .bold()
-                    .font(.title)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(lineWidth: 2)
-                            .foregroundColor(Color.gray.opacity(0.5))
-                    )
-                    .padding()
-                
+                HStack {
+                    TextField("Quiz Name", text: self.$quizName.max(100))
+                        .bold()
+                        .font(.title)
+                    if quizName.count != 0 {
+                        // Display a checkmark if the quiz name is available, or an X mark if it already exists in the quizzesArray
+                        Image(systemName: checkQuizExists(searchString: quizName, array: quizzesArray) ? "xmark" : "checkmark")
+                            .fontWeight(.bold)
+                            .foregroundColor(checkQuizExists(searchString: quizName, array: quizzesArray) ? .red : .green)
+                    }
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(lineWidth: 2)
+                        .foregroundColor(Color.gray.opacity(0.5))
+                )
+                .padding()
+
                 // Information about adding questions to the quiz
                 Text("If you add or remove questions while creating the Quiz Please click 'Edit Question' and then 'Save Question' again to ensure your questions are saved.")
                     .padding()
-                
+
                 // Slider to specify the number of questions
                 Text("Specify a number of questions: \(Int(numberOfQuestions))")
                     .padding()
@@ -81,7 +78,7 @@ struct QuizCreator: View {
                         .fontWeight(.thin)
                         .padding()
                 }
-                
+
                 // Loop over the number of questions selected by the slider
                 ForEach(0..<Int(numberOfQuestions), id: \.self) { index in
                     VStack {
@@ -91,7 +88,7 @@ struct QuizCreator: View {
                             .fontWeight(.light)
                             .padding()
                             .frame(alignment: .leading)
-                        
+
                         // QuestionMaker view for creating and editing questions
                         QuestionMaker()
                     }
@@ -100,36 +97,55 @@ struct QuizCreator: View {
                         questions = [:]
                     }
                 }
-                
+
                 // Button for saving the quiz
                 Button {
                     // Check if the questions dictionary is empty or if the quiz name is empty
                     if questions == [:] || quizName == "" {
                         showAlert = true // Set showAlert to true if either condition is true
+                    } else if checkQuizExists(searchString: quizName, array: quizzesArray) == true {
+                        errorAlert = true
                     } else {
+                        
+                        /**
+                         Uploads the quiz data to Firestore.
+                         This function takes the `questions` dictionary containing the quiz data and uploads it to Firestore, storing it under the collection named "quizzes" with the document reference being the `quizName`.
+                         */
+                        // Prepare the data for uploading the quiz to Firestore
                         let docData = questions
-                        let db = Firestore.firestore()
-                        
-                        // Upload the quiz to Firestore in the collection named "quizzes" with the reference for the document being the name of the quiz.
-                        db.collection("quizzes").document("\(quizName)").setData(docData) { err in
-                            if let err = err {
-                                print("Error uploading quiz: \(err)")
-                            } else {
-                                print("Successfully uploaded to Firebase")
-                            }
-                        }
-                        
-                        successAlert = true
-                        numberOfQuestions = 0
-                    }
+                        let db = Firestore.firestore() // Get the Firestore instance
+
+                          // Upload the quiz to Firestore with the document reference being the quizName
+                          db.collection("quizzes").document("\(quizName)").setData(docData) { err in
+                              if let err = err {
+                                  print("Error uploading quiz: \(err)") // Print the error message if there is an error while uploading the quiz.
+                              } else {
+                                  print("Successfully uploaded to Firebase") // Print a success message after successfully uploading the quiz.
+                              }
+                          }
+
+                          // Show the success alert to inform the user about the successful upload and reset properties
+                          successAlert = true
+                          numberOfQuestions = 0
+                          quizName = ""
+                      }
                 } label: {
-                    Text("Save Quiz")
+                    // Create Quiz button with custom alerts for different scenarios
+                    Text("Create Quiz")
                         .alert("Please create a Question and enter a Quiz Name before trying to save the quiz", isPresented: $showAlert) {
                             Button("Okay!", role: .cancel) {}
                         }
                         .alert("Successfully created a new quiz", isPresented: $successAlert) {
                             Button("Okay!", role: .cancel) {}
                         }
+                        .alert(isPresented: $errorAlert, content: {
+                            Alert(
+                                title: Text("Uh Oh!"),
+                                message: Text("Make sure the quiz you are trying to create doesn't already exist."),
+                                dismissButton: .default(Text("Okay"))
+
+                            )
+                        })
                         .frame(height: 50)
                         .frame(maxWidth: .infinity)
                         .background(Color.green) // Green background color
@@ -141,6 +157,7 @@ struct QuizCreator: View {
         }
     }
 }
+
 
 
 struct QuizCreator_Previews: PreviewProvider {
