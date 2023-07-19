@@ -122,7 +122,7 @@ func searchArray(searchTerm: String, array: [String]) -> [String] {
     var foundElements: [String] = []   // Array to store the found elements
     
     for element in array {
-        if element.lowercased().contains(searchTerm) {
+        if element.lowercased().contains(searchTerm.lowercased()) {
             foundElements.append(element)   // Append the element to the foundElements array
         }
     }

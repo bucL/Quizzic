@@ -74,7 +74,6 @@ struct SettingsView: View {
                         This function signs out the current user from the Firebase Authentication service.
                         It resets the `userID` variable to an empty string after successful sign-out.
                     */
-                    func signOutUser() {
                         // Get the Firebase Authentication instance.
                         let firebaseAuth = Auth.auth()
                         do {
@@ -86,7 +85,6 @@ struct SettingsView: View {
                             // Print an error message if there is an error during sign-out.
                             print("Error signing out: \(signOutError)")
                         }
-                    }
                 } label: {
                     // UI Portion of the Button i.e. what the user will see when the look at this view. 
                     Text("Log Out")

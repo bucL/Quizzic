@@ -9,9 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct ContentView: View {
-    // Binding used to change between the SignUp and Login Views.
-    @Binding var currentView: String
-    
+ 
     // AppStorage variable that stores the current user's uid across restarts of the application to esnrue they stay logged in
     @AppStorage("uid") var userID: String  = ""
     
@@ -41,8 +39,4 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+

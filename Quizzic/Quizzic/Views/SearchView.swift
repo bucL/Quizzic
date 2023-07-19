@@ -14,6 +14,7 @@ struct SearchView: View {
     
     // AppStorage variable that stores the current user's uid across restarts of the application to esnrue they stay logged in
     @AppStorage("username") var username: String = ""
+    
     @State var searchString: String  = ""
     @State var searchResult: [String] = []
     @State var displayResult: Bool = false

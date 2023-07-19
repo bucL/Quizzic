@@ -10,8 +10,10 @@
 */
 
 import SwiftUI
+import Firebase
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 struct LogInView: View {
     // Binding used to change between the SignUp and Login Views.
@@ -28,8 +30,8 @@ struct LogInView: View {
     @State private var password: String = ""
     
     // Variables used to determine if an error needs to be displayed. 
-    @State private var showError: Bool = false
-    @State private var isEmptyAlert = false
+    @State var showError = false
+    @State var isEmptyAlert = false
     
     var body: some View {
         ZStack {
@@ -125,8 +127,8 @@ struct LogInView: View {
                          */
                         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                             if let error = error {
-                                print(error) // Print any error that occurs during sign-in.
                                 showError = true // Set the `showError` variable to true to show an error alert.
+                                print(error) // Print any error that occurs during sign-in.
                                 return // Exit the function if there is an error to prevent further execution.
                             }
 
@@ -149,8 +151,8 @@ struct LogInView: View {
                                     }
                                 }
                             }
+                            return
                         }
-
                     }
                 } label: {
                     Text("Sign In")
@@ -165,16 +167,19 @@ struct LogInView: View {
                         )
                         .padding(.horizontal) // Add horizontal padding to the button.
                 }
+                
             }
 
         }
         .alert(isPresented: $showError, content: {
             Alert(
-                title: Text("Uh Oh!"),
-                message: Text("Please make sure the password you entered was correct and the account with the email address: \(email) exists."),
+                title: Text("Uh Oh"),
+                message: Text("Please make sure the password you entered was correct and the account with email \(email) exists."),
                 dismissButton: .default(Text("Okay"))
-                )
+                
+            )
         })
+        
         .alert(isPresented: $isEmptyAlert, content: {
             Alert(
                 title: Text("Uh Oh"),
