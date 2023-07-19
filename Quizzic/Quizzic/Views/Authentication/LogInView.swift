@@ -10,10 +10,8 @@
 */
 
 import SwiftUI
-import Firebase
 import FirebaseAuth
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 
 struct LogInView: View {
     // Binding used to change between the SignUp and Login Views.
@@ -29,9 +27,9 @@ struct LogInView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     
-    // Variables used to determine if an error needs to be displayed. 
-    @State var showError = false
-    @State var isEmptyAlert = false
+    // Variables used to determine if an error needs to be displayed.
+    @State private var showError: Bool = false
+    @State private var isEmptyAlert = false
     
     var body: some View {
         ZStack {
@@ -45,6 +43,10 @@ struct LogInView: View {
                         .font(.largeTitle) // Set the font size to large title.
                         .bold() // Make the text bold.
                     Spacer() // Add a flexible space to push the text to the left.
+                }
+                // Display an Alert if the user enters an invalid email address or the wrong password dependent upon the showError variable
+                .alert("Please make sure that the account with email \(email) exists and the password you entered is correct", isPresented: $showError) {
+                    Button("Okay!", role: .cancel) {}
                 }
                 .padding() // Add general padding to the horizontal stack.
                 .padding(.top) // Add additional top padding.
@@ -127,32 +129,32 @@ struct LogInView: View {
                          */
                         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                             if let error = error {
-                                showError = true // Set the `showError` variable to true to show an error alert.
                                 print(error) // Print any error that occurs during sign-in.
+                                showError = true // Set the `showError` variable to true to show an error alert.
                                 return // Exit the function if there is an error to prevent further execution.
-                            }
+                            } else {
+                                if let authResult = authResult {
+                                    userID = authResult.user.uid // Save the authenticated user's ID to the `userID` variable.
+                                    print(authResult.user) // Print the authenticated user's data.
 
-                            if let authResult = authResult {
-                                userID = authResult.user.uid // Save the authenticated user's ID to the `userID` variable.
-                                print(authResult.user) // Print the authenticated user's data.
+                                    let db = Firestore.firestore() // Create a Firestore database reference.
+                                    let docRef = db.collection("users").document("\(userID)") // Create a document reference for the user in the "users" collection with the user's ID.
+                                    docRef.getDocument { (document, error) in
+                                        if let document = document, document.exists {
+                                            let dataDescription = document.data().map(String.init(describing: )) ?? "nil" // Convert the user data to a string representation or set it to "nil" if empty.
+                                            print("Document data: \(dataDescription)") // Print the retrieved user data.
 
-                                let db = Firestore.firestore() // Create a Firestore database reference.
-                                let docRef = db.collection("users").document("\(userID)") // Create a document reference for the user in the "users" collection with the user's ID.
-                                docRef.getDocument { (document, error) in
-                                    if let document = document, document.exists {
-                                        let dataDescription = document.data().map(String.init(describing: )) ?? "nil" // Convert the user data to a string representation or set it to "nil" if empty.
-                                        print("Document data: \(dataDescription)") // Print the retrieved user data.
-
-                                        let data = document.data() // Get the user data from the document snapshot.
-                                        self.username = data!["username"] as? String ?? "" // Assign the username value to the `username` variable if it exists, otherwise set it to an empty string.
-                                        print(username) // Print the user's username.
-                                    } else {
-                                        print("Document does not exist") // Print a message if the user's document does not exist in the Firestore database.
+                                            let data = document.data() // Get the user data from the document snapshot.
+                                            self.username = data!["username"] as? String ?? "" // Assign the username value to the `username` variable if it exists, otherwise set it to an empty string.
+                                            print(username) // Print the user's username.
+                                        } else {
+                                            print("Document does not exist") // Print a message if the user's document does not exist in the Firestore database.
+                                        }
                                     }
                                 }
                             }
-                            return
                         }
+
                     }
                 } label: {
                     Text("Sign In")
@@ -167,19 +169,10 @@ struct LogInView: View {
                         )
                         .padding(.horizontal) // Add horizontal padding to the button.
                 }
-                
             }
 
         }
-        .alert(isPresented: $showError, content: {
-            Alert(
-                title: Text("Uh Oh"),
-                message: Text("Please make sure the password you entered was correct and the account with email \(email) exists."),
-                dismissButton: .default(Text("Okay"))
-                
-            )
-        })
-        
+        // Display an Alert if the user leaves the text fields empty dependent upon the isEmptyAlert variable
         .alert(isPresented: $isEmptyAlert, content: {
             Alert(
                 title: Text("Uh Oh"),
@@ -189,5 +182,5 @@ struct LogInView: View {
             )
         })
     }
+    
 }
-
