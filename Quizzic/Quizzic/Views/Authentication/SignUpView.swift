@@ -33,6 +33,7 @@ struct SignUpView: View {
     // Variables used to determine if an error needs to be displayed.
     @State var incorrectPassword = false
     @State private var isEmptyAlert = false
+    @State var emailInvalid = false
     
     var body: some View {
         ZStack {
@@ -91,6 +92,13 @@ struct SignUpView: View {
                     }
                     
                 }
+                /**
+                 Shows an alert when the user enters an invalid email address when attempting to create an account.
+                 This alert is presented when the user attempts to create an account when the email is badly formatted.
+                 */
+                .alert("Please make sure that email address: \(email) is a valid email address", isPresented: $emailInvalid) {
+                    Button("Okay!", role: .cancel) {}
+                }
                 .foregroundColor(.white) // Set the text color of the HStack to white
                 .padding() // Add padding to the HStack
                 .overlay(
@@ -108,8 +116,18 @@ struct SignUpView: View {
                         .autocorrectionDisabled() // Disable auto-correction
                     
                     Spacer() // Create a flexible space to push the text field to the left.
-                    
                 }
+                /**
+                 Shows an alert when the user enters an incorrect password format during account creation.
+                 This alert is presented when the user's password does not meet the specified requirements, which are a minimum of 6 characters, at least 1 uppercase character, and at least 1 symbol.
+                 */
+                .alert(isPresented: $incorrectPassword, content: {
+                    Alert(
+                        title: Text("Uh Oh"),
+                        message: Text("Please make sure the password you entered is a minimum of 6 characters long and has at least 1 uppercase character and 1 symbol."),
+                        dismissButton: .default(Text("Okay"))
+                    )
+                })
                 .foregroundColor(.white) // Set the text color of the HStack to white
                 .padding() // Add padding to the HStack
                 .overlay(
@@ -130,6 +148,7 @@ struct SignUpView: View {
                     Text("Already have an account?")
                         .foregroundColor(.gray) // Set the text color to gray.
                 }
+                
                 
                 Spacer() // Create a flexible space to push the content to the top.
                 Spacer() // Create a flexible space to push the content to the top.
@@ -153,6 +172,7 @@ struct SignUpView: View {
                             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                                 if let error = error {
                                     print(error) // Print any error that occurs during account creation.
+                                    emailInvalid = true
                                     return
                                 }
                                 if let authResult = authResult {
@@ -192,30 +212,11 @@ struct SignUpView: View {
                 }
             }
         }
-        /**
-         Shows an alert when the user enters an incorrect password format during account creation.
-         This alert is presented when the user's password does not meet the specified requirements, which are a minimum of 6 characters, at least 1 uppercase character, and at least 1 symbol.
-         - Note: The `incorrectPassword` boolean variable should be set to `true` to trigger this alert.
-         - Parameter isPresented: A boolean binding that determines whether the alert should be displayed.
-         - Returns: An alert that informs the user of the password requirements and provides a "Okay" button to dismiss the alert.
-         - SeeAlso: `incorrectPassword`
-         */
-        .alert(isPresented: $incorrectPassword, content: {
-            Alert(
-                title: Text("Uh Oh"),
-                message: Text("Please make sure the password you entered is a minimum of 6 characters long and has at least 1 uppercase character and 1 symbol"),
-                dismissButton: .default(Text("Okay"))
-            )
-        })
+        
 
         /**
          Shows an alert when the user leaves any text fields empty during account creation.
          This alert is presented when the user attempts to create an account without filling in all the required text fields (email, password, and username).
-         - Note: The `isEmptyAlert` boolean variable should be set to `true` to trigger this alert.
-         - Parameter isPresented: A boolean binding that determines whether the alert should be displayed.
-         - Returns: An alert that informs the user to fill in all the text fields and provides a "Okay" button to dismiss the alert.
-
-         - SeeAlso: `isEmptyAlert`
          */
         .alert(isPresented: $isEmptyAlert, content: {
             Alert(
