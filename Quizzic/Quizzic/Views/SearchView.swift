@@ -96,6 +96,9 @@ struct SearchView: View {
                 }
 
             }
+            .onAppear {
+                getQuizNames()
+            }
         }
         .navigationBarBackButtonHidden(true)
        
