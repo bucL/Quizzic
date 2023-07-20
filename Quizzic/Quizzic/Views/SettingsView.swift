@@ -17,7 +17,6 @@ struct SettingsView: View {
     @AppStorage("username") var username: String = ""
     
     @State private var showHelp = false // State variable to control if the HelpView should be shown or not.
-    let pdfName = "help" // Name of the PDF file for HelpView.
     
     var body: some View {
         NavigationView {
