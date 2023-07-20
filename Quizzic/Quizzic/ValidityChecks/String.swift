@@ -19,6 +19,7 @@ extension String {
         // Define the regular expression pattern for email validation
         let regex = try! NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$", options: .caseInsensitive)
         // Use the regular expression to check for a match in the email string
-        return regex.firstMatch(in: self, range: NSRange(location: 0, length: count)) != nil 
+        return regex.firstMatch(in: self, range: NSRange(location: 0, length: count)) != nil
     }
 }
+

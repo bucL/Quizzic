@@ -12,8 +12,10 @@ import PDFKit
 
 // SettingsView displays the user settings and options.
 struct SettingsView: View {
-    // AppStorage variables to store the current user's uid and username across app restarts for persistent login.
-    @AppStorage("uid") var userID: String = ""
+    // AppStorage variable that stores the current user's uid across restarts of the application to esnrue they stay logged in
+    @AppStorage("uid") var userID: String  = ""
+    
+    // AppStorage variable that stores the current user's uid across restarts of the application to esnrue they stay logged in
     @AppStorage("username") var username: String = ""
     
     @State private var showHelp = false // State variable to control if the HelpView should be shown or not.

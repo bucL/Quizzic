@@ -15,10 +15,10 @@ struct SearchView: View {
     // AppStorage variable that stores the current user's uid across restarts of the application to esnrue they stay logged in
     @AppStorage("username") var username: String = ""
     
-    @State var searchString: String  = ""
-    @State var searchResult: [String] = []
-    @State var displayResult: Bool = false
-    @State var navigate = false
+    // State variables used to facilitate search. 
+    @State var searchString: String  = "" //Used to store string the user searches for and subsequently passed to the searchArray function
+    @State var searchResult: [String] = [] // Used to store the result of the searchArray function
+    @State var navigate = false //Used to delay navigation and navigate to TakeQuiz. 
     
     var body: some View {
         NavigationView{

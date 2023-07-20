@@ -22,11 +22,11 @@ struct QuizCreator: View {
     @AppStorage("username") var username: String = ""
 
     // State properties for quiz creation
-    @State private var numberOfQuestions: Float = 0
-    @State private var quizName: String = ""
-    @State private var showAlert = false
-    @State private var successAlert = false
-    @State private var errorAlert = false
+    @State private var numberOfQuestions: Float = 0 //Stores the number of questions the user wants to create as defined by the slider.
+    @State private var quizName: String = "" //Stores the name of the quiz for quiz Creation and is used to verify if the quiz doesn't already exist in the checkQuizExists() function.
+    @State private var showAlert = false    // Boolean value used to display an alert if the user leaves any field empty during quiz creation.
+    @State private var successAlert = false // Boolean value used to display an alert if the user successfully creates a quiz.
+    @State private var errorAlert = false   // Boolean value used to display an alert if the user attempts to create a quiz with a quizName that already exists.
 
     var body: some View {
         ScrollView {
@@ -36,7 +36,6 @@ struct QuizCreator: View {
                     .font(.largeTitle)
                     .bold()
                     .padding()
-
                 // Text field for entering the quiz name
                 HStack {
                     TextField("Quiz Name", text: self.$quizName.max(100))

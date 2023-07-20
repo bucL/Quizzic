@@ -35,8 +35,3 @@ struct PDFKitView: UIViewRepresentable {
     func updateUIView(_ uiView: PDFView, context: UIViewRepresentableContext<PDFKitView>) {
     }
 }
-struct HelpView_Previews: PreviewProvider {
-    static var previews: some View {
-        HelpView()
-    }
-}
