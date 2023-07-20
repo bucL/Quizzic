@@ -33,7 +33,6 @@ struct SignUpView: View {
     // Variables used to determine if an error needs to be displayed.
     @State var incorrectPassword = false
     @State private var isEmptyAlert = false
-    @State var emailInvalid = false
     
     var body: some View {
         ZStack {
@@ -92,13 +91,6 @@ struct SignUpView: View {
                     }
                     
                 }
-                /**
-                 Shows an alert when the user enters an invalid email address when attempting to create an account.
-                 This alert is presented when the user attempts to create an account when the email is badly formatted.
-                 */
-                .alert("Please make sure that email address: \(email) is a valid email address", isPresented: $emailInvalid) {
-                    Button("Okay!", role: .cancel) {}
-                }
                 .foregroundColor(.white) // Set the text color of the HStack to white
                 .padding() // Add padding to the HStack
                 .overlay(
@@ -118,16 +110,13 @@ struct SignUpView: View {
                     Spacer() // Create a flexible space to push the text field to the left.
                 }
                 /**
-                 Shows an alert when the user enters an incorrect password format during account creation.
-                 This alert is presented when the user's password does not meet the specified requirements, which are a minimum of 6 characters, at least 1 uppercase character, and at least 1 symbol.
+                 Shows an alert when the user enters an incorrect password format or email format during account creation.
+                 This alert is presented when the user's password does not meet the specified requirements, which are a minimum of 6 characters, at least 1 uppercase character, and at least 1 symbol or when the isValidEmail() function returns a false value after checking the entered email with regex.
                  */
-                .alert(isPresented: $incorrectPassword, content: {
-                    Alert(
-                        title: Text("Uh Oh"),
-                        message: Text("Please make sure the password you entered is a minimum of 6 characters long and has at least 1 uppercase character and 1 symbol."),
-                        dismissButton: .default(Text("Okay"))
-                    )
-                })
+                .alert("Please make sure the password you entered is a minimum of 6 characters long and has at least 1 uppercase character and 1 symbol and the mail you entered is valid", isPresented: $incorrectPassword) {
+                    Button ("Okay", role: .cancel) {}
+                }
+                
                 .foregroundColor(.white) // Set the text color of the HStack to white
                 .padding() // Add padding to the HStack
                 .overlay(
@@ -157,7 +146,7 @@ struct SignUpView: View {
                     if email.isEmpty || password.isEmpty || newusername.isEmpty {
                         isEmptyAlert = true // Show an alert if any of the fields are empty.
                     } else {
-                        if isValidPassword(password) == true { // Check if the password is valid using the `isValidPassword` function.
+                        if isValidPassword(password) == true && email.isValidEmail() == true { // Check if the password is valid using the `isValidPassword` function.
                             /**
                              Create a new user account using Firebase Authentication and store user data in Firestore.
                              
@@ -172,7 +161,6 @@ struct SignUpView: View {
                             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                                 if let error = error {
                                     print(error) // Print any error that occurs during account creation.
-                                    emailInvalid = true
                                     return
                                 }
                                 if let authResult = authResult {
@@ -194,7 +182,7 @@ struct SignUpView: View {
                             }
                             
                         } else {
-                            incorrectPassword = true // Show an alert if the password does not meet the specified criteria.
+                            incorrectPassword = true
                         }
                     }
                 } label: {

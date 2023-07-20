@@ -7,7 +7,6 @@
 
 import SwiftUI
 import PDFKit
-import PDFViewer
 
 
 // HelpView displays the user manual PDF using PDFKit.
