@@ -33,6 +33,7 @@ struct SignUpView: View {
     // Variables used to determine if an error needs to be displayed.
     @State var incorrectPassword = false
     @State private var isEmptyAlert = false
+    @State var emailAlreadyExists = false
     
     var body: some View {
         ZStack {
@@ -137,6 +138,9 @@ struct SignUpView: View {
                     Text("Already have an account?")
                         .foregroundColor(.gray) // Set the text color to gray.
                 }
+                .alert("The email address you entered already has an account. Please login or use a different email address.", isPresented: $emailAlreadyExists) {
+                    Button ("Okay", role: .cancel) {}
+                }
                 
                 
                 Spacer() // Create a flexible space to push the content to the top.
@@ -160,6 +164,7 @@ struct SignUpView: View {
                              */
                             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                                 if let error = error {
+                                    emailAlreadyExists = true
                                     print(error) // Print any error that occurs during account creation.
                                     return
                                 }
