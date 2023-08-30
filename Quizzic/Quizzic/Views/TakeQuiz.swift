@@ -111,6 +111,7 @@ struct TakeQuiz: View {
                 .padding()
                 .background(Color.gray.opacity(0.2))
             }
+            .navigationViewStyle(StackNavigationViewStyle())
             .navigationBarHidden(true)
         }
         

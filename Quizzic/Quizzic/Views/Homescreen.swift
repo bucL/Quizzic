@@ -62,6 +62,7 @@ struct Homescreen: View {
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .navigationBarHidden(true) // Hides the navigation bar for a cleaner appearance.
         
     }

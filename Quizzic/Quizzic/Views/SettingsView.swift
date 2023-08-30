@@ -103,6 +103,7 @@ struct SettingsView: View {
             }
             .padding()
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .navigationBarHidden(true) // Hide the navigation bar for a cleaner UI.
     }
 }

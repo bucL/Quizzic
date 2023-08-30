@@ -100,6 +100,7 @@ struct SearchView: View {
                 getQuizNames()
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .navigationBarBackButtonHidden(true)
        
         
